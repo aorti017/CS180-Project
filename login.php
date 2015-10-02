@@ -6,9 +6,13 @@
 		set login cookies
 		-->
 		<?php 
-			$passwordHash =  password_hash($_POST['password'], PASSWORD_DEFAULT);
-			$username = $_POST['username']
-		?> 
-		
+			//replace this with code that retrieves the user's hashed password
+			$dbPassword =  password_hash($_POST['password'], PASSWORD_DEFAULT);	
+			if (password_verify($_POST['password'], $dbPassword)) {
+				echo "You're logged in";
+			} else{
+				echo "You're not logged in";
+			}
+		?> 		
 	</body>
 </html>
