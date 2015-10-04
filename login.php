@@ -6,16 +6,30 @@
 		set login cookies
 		-->
 		<?php 
+			error_reporting(-1);
+			include './database.php';
 			if($_POST['register']){
-				//validate user entered info and add to database
+				$statement = "SELECT * FROM Users WHERE username='".$_POST['username']."'";
+				$results = executeStatement($statement);
+				if(count($results) >= 1){
+					echo "Username not available";
+				} elseif(strlen($_POST['password'])<=0){
+					echo "Password not long enough";
+				} else{
+					$passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					$statement = "INSERT INTO Users (username, password) VALUE('".$_POST["username"]."', '".$passwordHash."')";
+					executeStatement($statement);
+					echo "Your account has been created";
+				}
 			} 
 			else{
-				//replace this with code that retrieves the user's hashed password
-				$dbPassword =  password_hash($_POST['password'], PASSWORD_DEFAULT);	
-				if (password_verify($_POST['password'], $dbPassword)) {
+				$statement = "SELECT password FROM Users WHERE username='".$_POST['username']."'";
+				$results = executeStatement($statement);
+				$passwordHash = $results[0][0];
+				if (password_verify($_POST['password'], $passwordHash)) {
 					echo "You're logged in";
 				} else{
-					echo "You're not logged in";
+					echo "Incorrect Password";
 				}
 			}
 		?> 		
