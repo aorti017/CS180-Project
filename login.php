@@ -28,6 +28,8 @@
 				$passwordHash = $results[0][0];
 				if (password_verify($_POST['password'], $passwordHash)) {
 					echo "You're logged in";
+					session_start();
+					header('Location: profile.html');
 				} else{
 					echo "Incorrect Password";
 				}
