@@ -1,7 +1,7 @@
 <?php
 	function executeStatement($statement){
 		try{
-		        $pdo = new PDO('mysql:host=localhost;dbname=[db name goes here]', 'root', '[root password goes here]');
+		        $pdo = new PDO('mysql:host=localhost;dbname=CS180', 'root', 'cs180group');
 			$query = $pdo->prepare($statement);
                 	$query->execute();
                 	$results = $query->fetchAll();
