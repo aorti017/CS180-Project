@@ -3,3 +3,8 @@ AddType application/x-httpd-php .html .htm
 	Order allow,deny
 	Deny from all
 </Files>
+
+<Files ~ "\.git$">
+	Order allow,deny
+	Deny from all
+</Files>
