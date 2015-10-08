@@ -1,1 +1,5 @@
 AddType application/x-httpd-php .html .htm
+<Files ~ "\.ini$">
+	Order allow,deny
+	Deny from all
+</Files>
