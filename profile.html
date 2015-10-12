@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>Profile</title>
-		<script type ="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	
@@ -10,6 +10,32 @@
 	<body>
 		<ul class="nav nav-tabs">
 			<li role="presentation" class "active"><a href="#">Home</a></li>
-		</ul>
+		</ul>	
+		<script type="text/javascript">
+			function getNewMessages(t){
+				//somehow get the user name from the session variable
+				var username = "alex";
+				var recpUser = "ying";
+				$.ajax({
+					type: 'GET',
+					url: './messages.php',
+					data: {username:username, recpUser: recpUser, time:t},
+					success: function(data){
+						var obj = jQuery.parseJSON(data);
+						//if new messgae then display
+						if(obj.message != ""){
+							console.log(obj.message);
+							console.log(obj.timestamp);
+						}
+						getNewMessages(obj.timestamp);
+					}
+				});
+			}
+			
+			$(function(){
+				var time = null;
+				getNewMessages(time);
+			});
+		</script>
 	</body>
 </html>
