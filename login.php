@@ -29,7 +29,7 @@
 				if (password_verify($_POST['password'], $passwordHash)) {
 					echo "You're logged in";
 					session_start();
-                    $_SESSION['username'] = $_POST['username'];
+					$_SESSION['username'] = $_POST['username'];
 					header('Location: profile.html');
 				} else{
 					echo "Incorrect Password";

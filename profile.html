@@ -1,10 +1,11 @@
 <html>
 	<head>
-		<title>Profile</title>
-		<script type ="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<title>Profile</title>
 	</head>
 
 	<body>
@@ -15,5 +16,33 @@
             <li><a href="logout.php">Logout</a></li>
             <li><a href="#">Home</a></li>
 		</ul>
+		<script type="text/javascript">
+			function getNewMessages(t){
+				//somehow get the user name from the session variable
+				var username = "alex";
+				var recpUser = "ying";
+				$.ajax({
+					type: 'GET',
+					url: './messages.php',
+					data: {username:username, recpUser: recpUser, time:t},
+					success: function(data){
+						var obj = jQuery.parseJSON(data);
+						if(obj.message != ""){
+							var messageArray = obj.message;
+							for(var i = 0; i < messageArray.length; i++){
+								console.log(messageArray[i]);
+							}
+							console.log(obj.timestamp);
+						}
+						getNewMessages(obj.timestamp);
+					}
+				});
+			}
+
+			$(function(){
+				var time = null;
+				getNewMessages(time);
+			});
+		</script>
 	</body>
 </html>
