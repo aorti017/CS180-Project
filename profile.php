@@ -31,6 +31,8 @@
             <li><a href="#">Home</a></li>
 		</ul>
 
+		<textarea id="newMessage" rows="5" cols="40"></textarea>
+		<button id="send">Send</button>
 		<script type="text/javascript">
 			function getNewMessages(t){
 				//somehow get the user name from the session variable
@@ -53,6 +55,27 @@
 					}
 				});
 			}
+
+			$('#send').click(function()
+			{
+				var message = $('#newMessage').val();
+				var username = "alex";
+				var recpUser = "ying";
+				var t = (new Date).getTime();
+				$.ajax(
+				{
+					type: "POST",
+					url: './sendmessage.php',
+					data: {username:username, recpUser:recpUser, time:t , message:message},
+					success: function(data)
+					{
+						if(data.message == message)
+						{
+							console.log("success");
+						}
+					}
+				})
+			});
 
 			$(function(){
 				var time = null;
