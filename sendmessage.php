@@ -8,4 +8,5 @@
 	$toInsert =	"INSERT INTO Messages VALUE (".$sender.",".$reciever.",".$newTimeStamp.",".$message.")";
 	executeStatement($toInsert);
 	echo"success";
+	break;
 ?>
