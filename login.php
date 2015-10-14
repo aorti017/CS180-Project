@@ -1,11 +1,11 @@
 <html>
 	<body>
-		<!--- 
+		<!---
 		check if valid username, if not return to sign in page with error message
 		check if valid password, if not return to sign in page with error message (use password_verify())
 		set login cookies
 		-->
-		<?php 
+		<?php
 			error_reporting(-1);
 			include './database.php';
 			if($_POST['register']){
@@ -21,7 +21,7 @@
 					executeStatement($statement);
 					echo "Your account has been created";
 				}
-			} 
+			}
 			else{
 				$statement = "SELECT password FROM Users WHERE username='".$_POST['username']."'";
 				$results = executeStatement($statement);
@@ -30,11 +30,11 @@
 					echo "You're logged in";
 					session_start();
 					$_SESSION['username'] = $_POST['username'];
-					header('Location: profile.html');
+                    header('Location: profile.php');
 				} else{
 					echo "Incorrect Password";
 				}
 			}
-		?> 		
+		?>
 	</body>
 </html>
