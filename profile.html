@@ -37,11 +37,23 @@
 				});
 			}
 					
-			$('#send').click(function() {
-				$.ajax({
+			$('#send').click(function()
+			{
+				var message = $('#newMessage').val();
+				var t = (new Date).getTime();
+				$.ajax(
+				{
 					type: "POST",
-					url:
-				});
+					url: './sendmessage.php',
+					data: {username:username, recpUser:recpUser, time:t , message:message},
+					success: function(data)
+					{
+						if(data.message == message)
+						{
+							console.log("success");
+						}
+					}
+				})
 			});
 	
 			$(function(){
