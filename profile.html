@@ -4,12 +4,16 @@
 		<script type ="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	</head>
-	
+
 	<body>
+        <?php
+            session_start();
+        ?>
 		<ul class="nav nav-tabs">
-			<li role="presentation" class "active"><a href="#">Home</a></li>
+            <li><a href="logout.php">Logout</a></li>
+            <li><a href="#">Home</a></li>
 		</ul>
 	</body>
 </html>
