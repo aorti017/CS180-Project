@@ -22,9 +22,11 @@
 					data: {username:username, recpUser: recpUser, time:t},
 					success: function(data){
 						var obj = jQuery.parseJSON(data);
-						//if new messgae then display
 						if(obj.message != ""){
-							console.log(obj.message);
+							var messageArray = obj.message;
+							for(var i = 0; i < messageArray.length; i++){
+								console.log(messageArray[i]);
+							}
 							console.log(obj.timestamp);
 						}
 						getNewMessages(obj.timestamp);

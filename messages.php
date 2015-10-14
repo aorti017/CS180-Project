@@ -14,8 +14,12 @@
 	
 			$tsr = executeStatement($sqlStatement);
 			$time = $tsr[0][0];
+			$oldMessages = array();
+			foreach($results as $row){
+				array_push($oldMessages, $row["message"]);
+			} 
 			$ret = array(
-				'message'=>$results[0]["message"],
+				'message'=>$oldMessages,
 				'timestamp'=>$time
 			);
 			$json = json_encode($ret);
@@ -36,8 +40,12 @@
 					" AND ((sender='".$sender."' AND receiver='".$receiver."') OR (sender='".$receiver.
 					"' AND receiver='".$sender."'))";
 				$results = executeStatement($sqlStatement);
+				$newMessages = array();
+				foreach($results as $row){
+					array_push($newMessages, $row["message"]);
+				}	 
 				$ret = array(
-					'message'=>$results[0]["message"],	
+					'message'=>$newMessages,	
 					'timestamp'=>$newTimeStamp
 				);
 				$json = json_encode($ret);
@@ -50,7 +58,7 @@
 				);
 				$json = json_encode($ret);
 				echo $json;
-				sleep(1);	
+				sleep(5);	
 			}
 			break;
 		}
