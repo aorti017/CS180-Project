@@ -12,6 +12,8 @@
 		<ul class="nav nav-tabs">
 			<li role="presentation" class "active"><a href="#">Home</a></li>
 		</ul>	
+		<textarea id="newMessage" rows="5" cols="40"></textarea>
+		<button id="send">Send</button>
 		<script type="text/javascript">
 			function getNewMessages(t){
 				//somehow get the user name from the session variable
@@ -34,7 +36,14 @@
 					}
 				});
 			}
-			
+					
+			$('#send').click(function() {
+				$.ajax({
+					type: "POST",
+					url:
+				});
+			});
+	
 			$(function(){
 				var time = null;
 				getNewMessages(time);
