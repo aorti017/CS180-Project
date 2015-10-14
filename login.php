@@ -30,7 +30,7 @@
 					echo "You're logged in";
 					session_start();
 					$_SESSION['username'] = $_POST['username'];
-					header('Location: profile.html');
+                    header('Location: profile.php');
 				} else{
 					echo "Incorrect Password";
 				}

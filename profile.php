@@ -1,3 +1,20 @@
+<?php
+    // starts login session for user
+    // need a session start in every file
+    session_start();
+    // this cookie checks for if a user has two tabs open and logs out in one tab
+    // refreshing the page on the non-logged out page will redirect to index.php
+    // since the user logged out
+    if (!isset($_COOKIE['username'])) {
+        // redirects to index.php
+        header('Location: index.php');
+    }
+    // sets the username cookie so that the user is logged in across all open tabs
+    // 0 is the timeout time so that if the browser closes, the user is logged out
+    setcookie('username', $_SESSION['username'], 0);
+    // echo $_SESSION['username'];
+?>
+
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -9,13 +26,11 @@
 	</head>
 
 	<body>
-        <?php
-            session_start();
-        ?>
-		<ul class="nav nav-tabs">
+        <ul class="nav nav-tabs">
             <li><a href="logout.php">Logout</a></li>
             <li><a href="#">Home</a></li>
 		</ul>
+
 		<script type="text/javascript">
 			function getNewMessages(t){
 				//somehow get the user name from the session variable
