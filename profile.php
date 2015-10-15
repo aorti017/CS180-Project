@@ -62,19 +62,17 @@
 				var username = "alex";
 				var recpUser = "ying";
 				var t = (new Date).getTime();
+				
 				$.ajax(
 				{
-					type: "POST",
+					type: 'GET',
 					url: './sendmessage.php',
 					data: {username:username, recpUser:recpUser, time:t , message:message},
 					success: function(data)
 					{
-						if(data.message == message)
-						{
-							console.log("success");
-						}
+						console.log("success");
 					}
-				})
+				});
 			});
 
 			$(function(){
