@@ -1,12 +1,11 @@
 <?php
 	include './database.php';
-	$sender = $_POST['username'];
-	$reciever = $_POST['recpUser'];
-	$newTimeStamp = $_POST['time'];
-	$message = $_POST['message'];
-
-	$toInsert =	"INSERT INTO Messages VALUE (".$sender.",".$reciever.",".$newTimeStamp.",".$message.")";
+	$sender = $_GET['username'];
+	$receiver = $_GET['recpUser'];
+	$newTimeStamp = $_GET['time'];
+	$message = $_GET['message'];
+	
+	$toInsert =	"INSERT INTO Messages VALUE ('".$sender."','".$receiver."','".$newTimeStamp."','".$message."')";
 	executeStatement($toInsert);
-	echo"success";
 	break;
 ?>
