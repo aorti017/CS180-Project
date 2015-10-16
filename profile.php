@@ -37,7 +37,14 @@
 		<button id="send">Send</button>
 		
 		<script type="text/javascript">
-				function getNewMessages(t){
+			function Message(type, message, time){
+				this.type = type;
+				this.message = message;
+				this.time = time;
+				this.getType = function(){ return this.type; };
+				this.getMessage = function(){ return this.message; };
+			}
+			function getNewMessages(t){
 				//somehow get the user name from the session variable
 				var username = parse();
 				var recpUser = "ying";
@@ -47,6 +54,18 @@
 					data: {username:username, recpUser: recpUser, time:t},
 					success: function(data){
 						var obj = jQuery.parseJSON(data);
+                        var messSent = obj.messageSent;
+                        var messSentTime = obj.messageSentTime;
+                        var messages = [];
+                        for(i=0; i < messSent.length; i++){
+                            messages.push(new Message('s', messSent[i], messSentTime[i]));
+                        }
+                        var messRec = obj.messageReceived;
+                        var messRecTime = obj.messageReceivedTime;
+                        for(i=0; i < messRec.length; i++){
+                            messages.push(new Message('r', messRec[i], messRecTime[i]));
+                        }
+                        console.log(messages.length);
 						//get the timestamps and message values from the json
 						//form them into tuples, sort and then display
 						getNewMessages(obj.timestamp);
@@ -57,7 +76,7 @@
 			$('#send').click(function()
 			{
 				var message = $('#newMessage').val();
-				//get the current logged in user 
+				//get the current logged in user
 				//and the foreground conversation
 				var username = parse();
 				var recpUser = "ying";
@@ -75,8 +94,8 @@
 				});
 			});
 
-				$(function(){
-					var time = null;
+			$(function(){
+				var time = null;
 				getNewMessages(time);
 			});
 		</script>
