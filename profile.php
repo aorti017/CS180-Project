@@ -38,6 +38,8 @@
 			this.type = type;
 			this.message = message;
 			this.time = time;
+			this.getType = functioncs{ return this.type; };
+			this.getMessage = functioncs{ return this.message; };
 		}	
 		function getNewMessages(t){
 				//somehow get the user name from the session variable
