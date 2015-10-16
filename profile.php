@@ -22,7 +22,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="javascript.js"></script>
 		<title>Profile</title>
+		
 	</head>
 
 	<body>
@@ -33,17 +35,18 @@
 
 		<textarea id="newMessage" rows="5" cols="40"></textarea>
 		<button id="send">Send</button>
+		
 		<script type="text/javascript">
-		function Message(type, message, time){
-			this.type = type;
-			this.message = message;
-			this.time = time;
-			this.getType = function(){ return this.type; };
-			this.getMessage = function(){ return this.message; };
-		}
-		function getNewMessages(t){
+			function Message(type, message, time){
+				this.type = type;
+				this.message = message;
+				this.time = time;
+				this.getType = function(){ return this.type; };
+				this.getMessage = function(){ return this.message; };
+			}
+			function getNewMessages(t){
 				//somehow get the user name from the session variable
-				var username = "alex";
+				var username = parse();
 				var recpUser = "ying";
 				$.ajax({
 					type: 'GET',
@@ -75,7 +78,7 @@
 				var message = $('#newMessage').val();
 				//get the current logged in user
 				//and the foreground conversation
-				var username = "alex";
+				var username = parse();
 				var recpUser = "ying";
 				var t = (new Date).getTime();
 
@@ -96,5 +99,12 @@
 				getNewMessages(time);
 			});
 		</script>
+			
 	</body>
 </html>
+
+
+
+
+
+
