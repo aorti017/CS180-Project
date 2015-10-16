@@ -6,9 +6,8 @@
 		set login cookies
 		-->
 		<?php
-			error_reporting(-1);
 			include './database.php';
-			if($_POST['register']){
+			if(isset($_POST['register'])){
 				$statement = "SELECT * FROM Users WHERE username='".$_POST['username']."'";
 				$results = executeStatement($statement);
 				if(count($results) >= 1){
