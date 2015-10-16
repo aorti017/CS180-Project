@@ -44,13 +44,13 @@
 					data: {username:username, recpUser: recpUser, time:t},
 					success: function(data){
 						var obj = jQuery.parseJSON(data);
-						if(obj.message != ""){
-							var messageArray = obj.message;
-							for(var i = 0; i < messageArray.length; i++){
-								console.log(messageArray[i]);
-							}
-							console.log(obj.timestamp);
-						}
+						var messageArray = obj.messageSent;
+                        if(messageArray != ""){
+    						for(var i = 0; i < messageArray.length; i++){
+	    						console.log(messageArray[i]);
+		    				}
+			    			console.log(obj.timestamp);
+                        }
 						getNewMessages(obj.timestamp);
 					}
 				});
@@ -62,7 +62,7 @@
 				var username = "alex";
 				var recpUser = "ying";
 				var t = (new Date).getTime();
-				
+
 				$.ajax(
 				{
 					type: 'GET',
