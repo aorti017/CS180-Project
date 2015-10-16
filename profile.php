@@ -44,13 +44,8 @@
 					data: {username:username, recpUser: recpUser, time:t},
 					success: function(data){
 						var obj = jQuery.parseJSON(data);
-						var messageArray = obj.messageSent;
-                        if(messageArray != ""){
-    						for(var i = 0; i < messageArray.length; i++){
-	    						console.log(messageArray[i]);
-		    				}
-			    			console.log(obj.timestamp);
-                        }
+						//get the timestamps and message values from the json
+						//form them into tuples, sort and then display
 						getNewMessages(obj.timestamp);
 					}
 				});
@@ -59,6 +54,8 @@
 			$('#send').click(function()
 			{
 				var message = $('#newMessage').val();
+				//get the current logged in user 
+				//and the foreground conversation
 				var username = "alex";
 				var recpUser = "ying";
 				var t = (new Date).getTime();

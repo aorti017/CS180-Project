@@ -5,10 +5,10 @@
 	$lastTimeStamp = $_GET['time'];
 	while(true){
 		if($lastTimeStamp == null){
-			$sqlStatement = "SELECT message FROM Messages WHERE sender='".$sender."' AND receiver='".$receiver."'";
+			$sqlStatement = "SELECT message, timestamp FROM Messages WHERE sender='".$sender."' AND receiver='".$receiver."'";
 			$resultsSent = executeStatement($sqlStatement);
 
-			$sqlStatement = "SELECT message FROM Messages WHERE receiver='".$sender."' AND sender='".$receiver."'";
+			$sqlStatement = "SELECT message, timestamp FROM Messages WHERE receiver='".$sender."' AND sender='".$receiver."'";
 			$resultsReceived = executeStatement($sqlStatement);
 
 			$sqlStatement = "SELECT MAX(timestamp) FROM Messages WHERE sender='".$sender."' AND receiver='".$receiver."' OR sender='".$receiver."' AND receiver='".$sender."'";
@@ -16,18 +16,24 @@
 			$time = $tsr[0][0];
 
 			$oldMessagesSent = array();
+			$oldMessagesTimeS = array();
 			foreach($resultsSent as $row){
 				array_push($oldMessagesSent, $row["message"]);
+				array_push($oldMessagesTimeS, $row["timestamp"]);
 			}
 
-            $oldMessagesReceived = array();
-            foreach($resultsReceived as $row){
-                array_push($oldMessagesReceived, $row["message"]);
-            }
+            		$oldMessagesReceived = array();
+			$oldMessagesTimeR = array();
+	            	foreach($resultsReceived as $row){
+		                array_push($oldMessagesReceived, $row["message"]);
+				array_push($oldMessagesTimeR, $row["timestamp"]);
+		        }  
 
 			$ret = array(
 				'messageSent'=>$oldMessagesSent,
-                'messageReceived'=>$oldMessagesReceived,
+				'messageSentTime'=>$oldMessagesTimeS,
+                		'messageReceived'=>$oldMessagesReceived,
+				'messageReceivedTime'=>$oldMessagesReceived,
 				'timestamp'=>$time
 			);
 			$json = json_encode($ret);
