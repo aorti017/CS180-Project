@@ -34,7 +34,7 @@
 		<textarea id="newMessage" rows="5" cols="40"></textarea>
 		<button id="send">Send</button>
 		<script type="text/javascript">
-		function Message(type Message, time){
+		function Message(type, message, time){
 			this.type = type;
 			this.message = message;
 			this.time = time;
