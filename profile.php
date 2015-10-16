@@ -34,7 +34,12 @@
 		<textarea id="newMessage" rows="5" cols="40"></textarea>
 		<button id="send">Send</button>
 		<script type="text/javascript">
-			function getNewMessages(t){
+		function Message(type Message, time){
+			this.type = type;
+			this.message = message;
+			this.time = time;
+		}	
+		function getNewMessages(t){
 				//somehow get the user name from the session variable
 				var username = "alex";
 				var recpUser = "ying";
