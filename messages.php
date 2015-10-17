@@ -33,7 +33,7 @@
 				'messageSent'=>$oldMessagesSent,
 				'messageSentTime'=>$oldMessagesTimeS,
                 		'messageReceived'=>$oldMessagesReceived,
-				'messageReceivedTime'=>$oldMessagesReceived,
+				'messageReceivedTime'=>$oldMessagesTimeR,
 				'timestamp'=>$time
 			);
 			$json = json_encode($ret);
@@ -70,7 +70,7 @@
 
 				$ret = array(
 					'messageSent'=>$newMessagesSent,
-                    'messageReceived'=>$newMessagesReceived,
+                    			'messageReceived'=>$newMessagesReceived,
 					'timestamp'=>$newTimeStamp
 				);
 
@@ -80,7 +80,7 @@
 			else{
 				$ret = array(
 					'messageSent'=>"",
-                    'messageReceived'=>"",
+                    			'messageReceived'=>"",
 					'timestamp'=>$lastTimeStamp
 				);
 				$json = json_encode($ret);
