@@ -24,7 +24,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="javascript.js"></script>
 		<title>Profile</title>
-		
+
 	</head>
 
 	<body>
@@ -35,7 +35,7 @@
 
 		<textarea id="newMessage" rows="5" cols="40"></textarea>
 		<button id="send">Send</button>
-		
+
 		<script type="text/javascript">
 			function Message(type, message, time){
 				this.type = type;
@@ -50,7 +50,7 @@
 				var username = parse();
 				username = "alex";
 				var recpUser = "ying";
-				$.ajax({
+                $.ajax({
 					type: 'GET',
 					url: './messages.php',
 					data: {username:username, recpUser: recpUser, time:t},
@@ -120,7 +120,7 @@
 				getNewMessages(time);
 			});
 		</script>
-			
+
 	</body>
 </html>
 
