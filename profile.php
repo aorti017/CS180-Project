@@ -43,10 +43,12 @@
 				this.time = time;
 				this.getType = function(){ return this.type; };
 				this.getMessage = function(){ return this.message; };
+				this.getTime = function(){ return this.time; };
 			}
 			function getNewMessages(t){
 				//somehow get the user name from the session variable
 				var username = parse();
+				username = "alex";
 				var recpUser = "ying";
                 $.ajax({
 					type: 'GET',
@@ -54,18 +56,36 @@
 					data: {username:username, recpUser: recpUser, time:t},
 					success: function(data){
 						var obj = jQuery.parseJSON(data);
-                        var messSent = obj.messageSent;
-                        var messSentTime = obj.messageSentTime;
-                        var messages = [];
-                        for(i=0; i < messSent.length; i++){
-                            messages.push(new Message('s', messSent[i], messSentTime[i]));
-                        }
-                        var messRec = obj.messageReceived;
-                        var messRecTime = obj.messageReceivedTime;
-                        for(i=0; i < messRec.length; i++){
-                            messages.push(new Message('r', messRec[i], messRecTime[i]));
-                        }
-                        console.log(messages.length);
+						if(t == null){
+                        				var messSent = obj.messageSent;
+			                	        var messSentTime = obj.messageSentTime;
+                        				var messages = [];
+				                        for(i=0; i < messSent.length; i++){
+        	                				    messages.push(new Message('s', messSent[i], messSentTime[i]));
+				                        }	
+                        				var messRec = obj.messageReceived;
+			        	                var messRecTime = obj.messageReceivedTime;
+                        				for(i=0; i < messRec.length; i++){
+			                        	    messages.push(new Message('r', messRec[i], messRecTime[i]));
+                        				}
+							messages.sort(function(a, b){
+								return a.getTime() - b.getTime();
+							});	
+							for(i=0; i<messages.length; i++){
+								console.log(messages[i].getMessage());
+							}
+						}
+						else{
+							var messageSent = obj.messageSent;
+							var messageReceived = obj.messageReceived;
+							if(messageSent == "" && messageReceived != ""){
+								console.log(messageReceived[0]);
+							}
+							else if(messageReceived == "" && messageSent != ""){
+								console.log(messageSent[0]);
+							}
+						}
+					    	
 						//get the timestamps and message values from the json
 						//form them into tuples, sort and then display
 						getNewMessages(obj.timestamp);
@@ -78,7 +98,8 @@
 				var message = $('#newMessage').val();
 				//get the current logged in user
 				//and the foreground conversation
-				var username = parse();
+				//var username = parse();
+				var username = "alex";
 				var recpUser = "ying";
 				var t = (new Date).getTime();
 
@@ -86,11 +107,11 @@
 				{
 					type: 'GET',
 					url: './sendmessage.php',
-					data: {username:username, recpUser:recpUser, time:t , message:message},
-					success: function(data)
+					data: {username:username, recpUser:recpUser, time:t , message:message}
+					/*success: function(data)
 					{
 						console.log("success");
-					}
+					}*/
 				});
 			});
 
