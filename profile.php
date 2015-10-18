@@ -49,7 +49,7 @@
 				//somehow get the user name from the session variable
 				var username = parse();
 				var recpUser = "ying";
-				$.ajax({
+                $.ajax({
 					type: 'GET',
 					url: './messages.php',
 					data: {username:username, recpUser: recpUser, time:t},

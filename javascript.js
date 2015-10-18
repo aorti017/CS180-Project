@@ -1,24 +1,17 @@
-function parse()
-{
-			var username = document.cookie;
-				var temp='';
-				for(var i = 0; i < username.length;++i)
-				{
-					if(username[i]== '=')
-					{
-						var j = i+1;
-						while(username[j]!= ';')
-						{
+function parse() {
+    var username = (document.cookie).trim();
+    var temp = '';
 
-							temp +=username[j];
+    //position of username inside the cookies
+    var usernamePosition = username.indexOf("username=") + 9;
+    while(username[usernamePosition] != ';' && username.length > usernamePosition)
+    {
+        temp += username[usernamePosition];
 
-							++j;
-						}
-						break;
+        usernamePosition++;
+    }
 
-					}
-				}
-				username = temp;
-		return username;
+    username = temp;
+    return username;
 }
 
