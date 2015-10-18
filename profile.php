@@ -24,7 +24,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="javascript.js"></script>
 		<title>Profile</title>
-		
+
 	</head>
 
 	<body>
@@ -35,7 +35,7 @@
 
 		<textarea id="newMessage" rows="5" cols="40"></textarea>
 		<button id="send">Send</button>
-		
+
 		<script type="text/javascript">
 			function Message(type, message, time){
 				this.type = type;
@@ -48,7 +48,6 @@
 			function getNewMessages(t){
 				//somehow get the user name from the session variable
 				var username = parse();
-				username = "alex";
 				var recpUser = "ying";
 				$.ajax({
 					type: 'GET',
@@ -62,7 +61,7 @@
                         				var messages = [];
 				                        for(i=0; i < messSent.length; i++){
         	                				    messages.push(new Message('s', messSent[i], messSentTime[i]));
-				                        }	
+				                        }
                         				var messRec = obj.messageReceived;
 			        	                var messRecTime = obj.messageReceivedTime;
                         				for(i=0; i < messRec.length; i++){
@@ -70,7 +69,7 @@
                         				}
 							messages.sort(function(a, b){
 								return a.getTime() - b.getTime();
-							});	
+							});
 							for(i=0; i<messages.length; i++){
 								console.log(messages[i].getMessage());
 							}
@@ -85,7 +84,7 @@
 								console.log(messageSent[0]);
 							}
 						}
-					    	
+
 						//get the timestamps and message values from the json
 						//form them into tuples, sort and then display
 						getNewMessages(obj.timestamp);
@@ -98,8 +97,7 @@
 				var message = $('#newMessage').val();
 				//get the current logged in user
 				//and the foreground conversation
-				//var username = parse();
-				var username = "alex";
+				var username = parse();
 				var recpUser = "ying";
 				var t = (new Date).getTime();
 
@@ -120,7 +118,7 @@
 				getNewMessages(time);
 			});
 		</script>
-			
+
 	</body>
 </html>
 
