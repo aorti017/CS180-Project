@@ -46,14 +46,21 @@
 				this.getTime = function(){ return this.time; };
 			}
 			function getNewMessages(t){
-				//somehow get the user name from the session variable
 				var username = parse();
+				/*TODO*/
+				//get the user the message is supposed to be sent to
+				//from the selected conversation
 				var recpUser = "ying";
-                $.ajax({
+                		$.ajax({
 					type: 'GET',
 					url: './messages.php',
 					data: {username:username, recpUser: recpUser, time:t},
 					success: function(data){
+						/*TODO*/
+						//instead of outputting to console,
+						//output to html elements in order they were sent
+						//and user colors or identifiers to indicate who
+						//sent and who received
 						var obj = jQuery.parseJSON(data);
 						if(t == null){
                         				var messSent = obj.messageSent;
@@ -84,9 +91,6 @@
 								console.log(messageSent[0]);
 							}
 						}
-
-						//get the timestamps and message values from the json
-						//form them into tuples, sort and then display
 						getNewMessages(obj.timestamp);
 					}
 				});
@@ -95,8 +99,8 @@
 			$('#send').click(function()
 			{
 				var message = $('#newMessage').val();
-				//get the current logged in user
-				//and the foreground conversation
+				//clears the textarea after a message is sent
+				document.getElementById("newMessage").value="";
 				var username = parse();
 				var recpUser = "ying";
 				var t = (new Date).getTime();
@@ -106,10 +110,6 @@
 					type: 'GET',
 					url: './sendmessage.php',
 					data: {username:username, recpUser:recpUser, time:t , message:message}
-					/*success: function(data)
-					{
-						console.log("success");
-					}*/
 				});
 			});
 
