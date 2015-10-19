@@ -99,6 +99,9 @@
 			$('#send').click(function()
 			{
 				var message = $('#newMessage').val();
+				if(message == ""){
+					return;
+				}
 				//clears the textarea after a message is sent
 				document.getElementById("newMessage").value="";
 				var username = parse();
