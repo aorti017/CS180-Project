@@ -7,14 +7,16 @@
 		-->
 		<?php
 			include './database.php';
-			if(isset($_POST['register'])){
+			if(isset($_POST['register'])) {
 				$statement = "SELECT * FROM Users WHERE username='".$_POST['username']."'";
 				$results = executeStatement($statement);
-				if(count($results) >= 1){
+				if(count($results) >= 1) {
 					echo "Username not available";
-				} elseif(strlen($_POST['password'])<=0){
+				}
+                elseif(strlen($_POST['password']) <= 0) {
 					echo "Password not long enough";
-				} else{
+				}
+                else{
 					$passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 					$statement = "INSERT INTO Users (username, password) VALUE('".$_POST["username"]."', '".$passwordHash."')";
 					executeStatement($statement);
@@ -24,15 +26,20 @@
 			else{
 				$statement = "SELECT password FROM Users WHERE username='".$_POST['username']."'";
 				$results = executeStatement($statement);
-				$passwordHash = $results[0][0];
-				if (password_verify($_POST['password'], $passwordHash)) {
-					echo "You're logged in";
-					session_start();
-					$_SESSION['username'] = $_POST['username'];
-                    header('Location: profile.php');
-				} else{
-					echo "Incorrect Password";
-				}
+				if (count($results) == 0) {
+                    echo "Invalid username";
+                }
+                else {
+                    $passwordHash = $results[0][0];
+                    if (password_verify($_POST['password'], $passwordHash)) {
+                        session_start();
+                        $_SESSION['username'] = $_POST['username'];
+                        header('Location: profile.php');
+                    }
+                    else {
+                        echo "Invalid password";
+                    }
+                }
 			}
 		?>
 	</body>

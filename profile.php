@@ -24,26 +24,25 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="javascript.js"></script>
 		<title>Profile</title>
-
 	</head>
 
 	<body>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-pills">
             <li><a href="logout.php">Logout</a></li>
-            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
 		</ul>
 
 		<textarea id="newMessage" rows="5" cols="40"></textarea>
 		<button id="send">Send</button>
 
 		<script type="text/javascript">
+            // type = sent or received
+            // message = content of the message
+            // time = time of message delivery
 			function Message(type, message, time){
 				this.type = type;
 				this.message = message;
 				this.time = time;
-				this.getType = function(){ return this.type; };
-				this.getMessage = function(){ return this.message; };
-				this.getTime = function(){ return this.time; };
 			}
 			function getNewMessages(t){
 				var username = parse();
@@ -51,7 +50,7 @@
 				//get the user the message is supposed to be sent to
 				//from the selected conversation
 				var recpUser = "ying";
-                		$.ajax({
+                $.ajax({
 					type: 'GET',
 					url: './messages.php',
 					data: {username:username, recpUser: recpUser, time:t},
@@ -63,22 +62,22 @@
 						//sent and who received
 						var obj = jQuery.parseJSON(data);
 						if(t == null){
-                        				var messSent = obj.messageSent;
-			                	        var messSentTime = obj.messageSentTime;
-                        				var messages = [];
-				                        for(i=0; i < messSent.length; i++){
-        	                				    messages.push(new Message('s', messSent[i], messSentTime[i]));
-				                        }
-                        				var messRec = obj.messageReceived;
-			        	                var messRecTime = obj.messageReceivedTime;
-                        				for(i=0; i < messRec.length; i++){
-			                        	    messages.push(new Message('r', messRec[i], messRecTime[i]));
-                        				}
+                            var messSent = obj.messageSent;
+                            var messSentTime = obj.messageSentTime;
+                            var messages = [];
+                            for(i = 0; i < messSent.length; i++) {
+                                    messages.push(new Message('s', messSent[i], messSentTime[i]));
+                            }
+                            var messRec = obj.messageReceived;
+                            var messRecTime = obj.messageReceivedTime;
+                            for(i = 0; i < messRec.length; i++){
+                                messages.push(new Message('r', messRec[i], messRecTime[i]));
+                            }
 							messages.sort(function(a, b){
-								return a.getTime() - b.getTime();
+								return a.time - b.time;
 							});
-							for(i=0; i<messages.length; i++){
-								console.log(messages[i].getMessage());
+							for(i = 0; i < messages.length; i++){
+								console.log(messages[i].message);
 							}
 						}
 						else{
