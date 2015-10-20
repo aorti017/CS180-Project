@@ -32,7 +32,10 @@
             <li class="active"><a href="#">Home</a></li>
 		</ul>
 
-		<textarea id="newMessage" rows="5" cols="40"></textarea>
+        <div id="messageContainer">
+        </div>
+
+        <textarea id="newMessage" rows="5" cols="40"></textarea>
 		<button id="send">Send</button>
 
 		<script type="text/javascript">
@@ -61,10 +64,11 @@
 						//and user colors or identifiers to indicate who
 						//sent and who received
 						var obj = jQuery.parseJSON(data);
-						if(t == null){
+                        var messages = [];
+
+                        if(t == null){
                             var messSent = obj.messageSent;
                             var messSentTime = obj.messageSentTime;
-                            var messages = [];
                             for(i = 0; i < messSent.length; i++) {
                                     messages.push(new Message('s', messSent[i], messSentTime[i]));
                             }
@@ -77,17 +81,20 @@
 								return a.time - b.time;
 							});
 							for(i = 0; i < messages.length; i++){
-								console.log(messages[i].message);
+								$('#messageContainer').append(messages[i].message + "<br>");
+                                console.log(messages[i].message);
 							}
 						}
 						else{
 							var messageSent = obj.messageSent;
 							var messageReceived = obj.messageReceived;
 							if(messageSent == "" && messageReceived != ""){
-								console.log(messageReceived[0]);
+								$('#messageContainer').append(messageReceived[0] + "<br>");
+                                console.log(messageReceived[0]);
 							}
 							else if(messageReceived == "" && messageSent != ""){
-								console.log(messageSent[0]);
+								$('#messageContainer').append(messageSent[0] + "<br>");
+                                console.log(messageSent[0]);
 							}
 						}
 						getNewMessages(obj.timestamp);
@@ -115,12 +122,11 @@
 				});
 			});
 
-			$(function(){
+            $(function(){
 				var time = null;
 				getNewMessages(time);
-			});
+            });
 		</script>
-
 	</body>
 </html>
 
