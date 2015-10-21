@@ -1,0 +1,25 @@
+#navigation ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#navigation li {
+	background: #ccc;
+	border-left: 1px solid #999;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+#navigation a {
+	color: #666;
+	font-weight: bold;
+	padding: 5px 10px;
+	text-decoration: none;
+}
+#navigation a:hover {
+	color: #333;
+}
+#navigation #currentpage a {
+	background: #fff;
+	color: #333;
+}

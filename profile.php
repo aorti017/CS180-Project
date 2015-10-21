@@ -29,7 +29,8 @@
 	<body>
         <ul class="nav nav-pills">
             <li><a href="logout.php">Logout</a></li>
-            <li class="active"><a href="#">Home</a></li>
+            <li><a href="redirect.php">Home</a></li>
+            <li class="active"><a href="">Messages</a></li>
 		</ul>
 
         <div id="messageContainer">
