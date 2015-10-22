@@ -17,7 +17,7 @@ session_start()
 		<div id="navigation">
         	<ul>
             	<li><a href="logout.php">Logout</a></li>
-				<li id="currentpage"><a href="">Contatcs</a></li>
+				<li id="currentpage"><a href="">Contacts</a></li>
 				<li><a href="profile.php">Messages</a></li>
 			</ul>
 		</div>
