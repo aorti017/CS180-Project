@@ -27,7 +27,7 @@
 	            	foreach($resultsReceived as $row){
 		                array_push($oldMessagesReceived, $row["message"]);
 				array_push($oldMessagesTimeR, $row["timestamp"]);
-		        }  
+		        }
 
 			$ret = array(
 				'messageSent'=>$oldMessagesSent,
@@ -85,7 +85,7 @@
 				);
 				$json = json_encode($ret);
 				echo $json;
-				sleep(5);
+				sleep(1);
 			}
 			break;
 		}

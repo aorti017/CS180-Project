@@ -43,17 +43,30 @@
             // type = sent or received
             // message = content of the message
             // time = time of message delivery
+
+
+            //used to get the GET variables
+            //for more information see:
+            //http://papermashup.com/read-url-get-variables-withjavascript/
+            function getUrlVars() {
+                var vars = {};
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                    vars[key] = value;
+                });
+                return vars;
+            }
+
 			function Message(type, message, time){
 				this.type = type;
 				this.message = message;
 				this.time = time;
 			}
-			function getNewMessages(t){
+			function getNewMessages(t, recpUser){
 				var username = parse();
 				/*TODO*/
 				//get the user the message is supposed to be sent to
 				//from the selected conversation
-				var recpUser = "ying";
+
                 $.ajax({
 					type: 'GET',
 					url: './messages.php',
@@ -98,7 +111,7 @@
                                 console.log(messageSent[0]);
 							}
 						}
-						getNewMessages(obj.timestamp);
+						getNewMessages(obj.timestamp, recpUser);
 					}
 				});
 			}
@@ -112,7 +125,7 @@
 				//clears the textarea after a message is sent
 				document.getElementById("newMessage").value="";
 				var username = parse();
-				var recpUser = "ying";
+                var recpUser = getUrlVars()['contacts'];
 				var t = (new Date).getTime();
 
 				$.ajax(
@@ -125,7 +138,8 @@
 
             $(function(){
 				var time = null;
-				getNewMessages(time);
+                var recpUser = getUrlVars()['contacts'];
+				getNewMessages(time, recpUser);
             });
 		</script>
 	</body>

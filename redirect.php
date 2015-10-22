@@ -33,7 +33,15 @@ session_start()
                         var obj = jQuery.parseJSON(data);
                         var conts = obj.contacts;
                         for(i = 0; i < conts.length; i++){
-                            console.log(conts[i]);
+                            var btn = document.createElement("BUTTON");
+                            btn.setAttribute("id", "contactBtn_");
+                            btn.setAttribute("value", conts[i]);
+                            btn.onclick=function(){
+                                window.location.replace("http://104.236.163.138/profile.php?contacts="+this.value);
+                            };
+                            var t = document.createTextNode(conts[i]);
+                            btn.appendChild(t);
+                            document.body.appendChild(btn);
                         }
                     }
                 });
