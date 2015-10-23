@@ -11,3 +11,4 @@ TODO
 * Remove Ying's info from root's git config
 * Add comments
 * Start documentation
+* Organize files
