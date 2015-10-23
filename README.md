@@ -8,3 +8,6 @@ The current site build can be found [here](http://104.236.163.138/).
 TODO
 ----
 * Escape all user input
+* Remove Ying's info from root's git config
+* Add comments
+* Start documentation
