@@ -1,5 +1,5 @@
 <?php
-session_start()
+    session_start();
 ?>
 <html>
 	<head>
@@ -51,5 +51,10 @@ session_start()
                 getContacts();
             });
         </script>
+        <form action="addContact.php" method="get">
+            Add user to contacts:<br>
+            <input type="username"  name="contact">
+        </form>
+        </form>
 	</body>
 </html>
