@@ -1,5 +1,14 @@
 <?php
     session_start();
+
+if($_SESSION['error']== "error")
+		{
+		echo '<script language="javascript">';
+echo 'alert("User doesn\'t exist")';
+echo '</script>';
+			$_SESSION['error']="none";
+		}
+
 ?>
 <html>
 	<head>
@@ -46,15 +55,16 @@
                     }
                 });
             }
-
+ 
             $(function(){
                 getContacts();
+		
             });
         </script>
-        <form action="addContact.php" method="get">
+        <form action = "addContact.php"id="addCnt" method="get">
             Add user to contacts:<br>
-            <input type="username"  name="contact">
-        </form>
+            <input type="username"  name="contact" id="addCntInput">
+	    <input type="hidden" name="username" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
         </form>
 	</body>
 </html>

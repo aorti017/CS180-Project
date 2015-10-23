@@ -2,6 +2,8 @@
     if (isset($_COOKIE['username'])) {
         header('Location: profile.php');
     }
+session_start();
+$_SESSION['error']="none";
 ?>
 
 <html>
