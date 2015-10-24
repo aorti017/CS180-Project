@@ -14,7 +14,9 @@ $_SESSION['error']="none";
 			Username: <input type="username" name="username" placeholder="John Doe"><br>
 			Password: <input type="password" name="password"><br>
 			<input type="submit" value="Login" name="login">
-			<input type="submit" value="Register" name="register">
 		</form>
+		<button>
+			<a href="register.php">Register</a>
+		</button>
 	</body>
 </html>
