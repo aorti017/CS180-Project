@@ -2,9 +2,7 @@
 	session_start();
 	include './database.php';
 	//print_r($_POST);
-	if($_POST['username'] != "" && $_POST['password'] != "" &&
-	   isset($_POST['firstname']) && isset($_POST['lastname']) &&
-	   isset($_POST['birthdate']) && isset($_POST['gender']) && isset($_POST['email'])) {
+	if($_POST['username'] != "" && $_POST['password'] != "") {
 		$statement = "SELECT * FROM Users WHERE username='".$_POST['username']."'";
 		$results = executeStatement($statement);
 		if(count($results) >= 1) {
