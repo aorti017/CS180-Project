@@ -10,15 +10,15 @@
     //check if user exists
     // if so add user
     $sqlStatement = "SELECT * FROM Users WHERE username='".$contact."'";
-    $results = executeStatement($sqlStatement); 
+    $results = executeStatement($sqlStatement);
     if(count($results) <= 0 || $contact == $username){
-	$_SESSION["error"] = "error";
-	header('Location: redirect.php');
+        $_SESSION["error"] = "error";
+        header('Location: redirect.php');
     }
     else{
-	//add user to contact
-	$sqlStatement = "INSERT INTO Contacts VALUE('".$username."','".$contact."')";
-	executeStatement($sqlStatement);
-	header('Location: redirect.php');
+        //add user to contact
+        $sqlStatement = "INSERT INTO Contacts VALUE('".$username."','".$contact."')";
+        executeStatement($sqlStatement);
+        header('Location: redirect.php');
     }
 ?>

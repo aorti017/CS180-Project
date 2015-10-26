@@ -46,7 +46,7 @@ echo '</script>';
                             btn.setAttribute("id", "contactBtn_");
                             btn.setAttribute("value", conts[i]);
                             btn.onclick=function(){
-                                window.location.replace("http://104.236.163.138/profile.php?contacts="+this.value);
+                                window.location.replace("./profile.php?contacts="+this.value);
                             };
                             var t = document.createTextNode(conts[i]);
                             btn.appendChild(t);
@@ -55,16 +55,18 @@ echo '</script>';
                     }
                 });
             }
- 
+
             $(function(){
                 getContacts();
-		
+
             });
         </script>
-        <form action = "addContact.php"id="addCnt" method="get">
+        <br>
+        <form action="addContact.php" id="addCnt" method="get">
+	        <input type="hidden" name="username" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
             Add user to contacts:<br>
-            <input type="username"  name="contact" id="addCntInput">
-	    <input type="hidden" name="username" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
+            <input type="username" name="contact" id="addCntInput" placeholder="Username">
+            <input type="submit" value="Add">
         </form>
 	</body>
 </html>
