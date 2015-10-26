@@ -40,11 +40,6 @@
 		<button id="send">Send</button>
 
 		<script type="text/javascript">
-            // type = sent or received
-            // message = content of the message
-            // time = time of message delivery
-
-
             //used to get the GET variables
             //for more information see:
             //http://papermashup.com/read-url-get-variables-withjavascript/
@@ -56,6 +51,9 @@
                 return vars;
             }
 
+            // type = sent or received
+            // message = content of the message
+            // time = time of message delivery
 			function Message(type, message, time){
 				this.type = type;
 				this.message = message;
