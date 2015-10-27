@@ -4,6 +4,10 @@
 		echo "Please fill out all the input fields";
 		$_SESSION['error'] = "none";
 	}
+    elseif ($_SESSION['error'] == "date") {
+        echo "Please fill out your birthday according to the specified format";
+        $_SESSION['error'] = "none";
+    }
 ?>
 <html>
 	<head>
@@ -20,7 +24,7 @@
                 Last Name: <br>
 				<input type="text" name="lastname" id="lastname" placeholder="Doe"><br><br>
 				Birthday: <br>
-                <input type="date" name="birthdate" id="birthdate" placeholder="mm/dd/yyyy"><br><br>
+                <input type="date" name="birthdate" id="birthdate" placeholder="yyyy/mm/dd"><br><br>
 				Email: <br>
                 <input type="text" name="email" id="email" placeholder="Obama@whitehouse.gov"><br><br>
 				Gender: <br>
