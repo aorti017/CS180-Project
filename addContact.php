@@ -13,12 +13,12 @@
     $results = executeStatement($sqlStatement);
     if(count($results) <= 0 || $contact == $username){
         $_SESSION["error"] = "error";
-        header('Location: redirect.php');
+        header('Location: contacts.php');
     }
     else{
         //add user to contact
         $sqlStatement = "INSERT INTO Contacts VALUE('".$username."','".$contact."')";
         executeStatement($sqlStatement);
-        header('Location: redirect.php');
+        header('Location: contacts.php');
     }
 ?>
