@@ -34,7 +34,7 @@
                     if (password_verify($_POST['password'], $passwordHash)) {
                         session_start();
                         $_SESSION['username'] = $_POST['username'];
-                        header('Location: profile.php');
+                        header('Location: messages.php');
                     }
                     else {
                         echo "Invalid password";
