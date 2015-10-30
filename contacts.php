@@ -27,6 +27,7 @@
             	<li><a href="logout.php">Logout</a></li>
 				<li id="currentpage"><a href="">Contacts</a></li>
 				<li><a href="messages.php">Messages</a></li>
+				<li><a href="userProfile.php">Profile</a></li>
 			</ul>
 		</div>
 		<br>
@@ -46,6 +47,7 @@
                             btn.setAttribute("value", conts[i]);
                             btn.onclick=function(){
                                 window.location.replace("./messages.php?contacts="+this.value);
+                                //window.location.replace("friendProfile.php?userVar="+this.value);
                             };
                             var t = document.createTextNode(conts[i]);
                             btn.appendChild(t);

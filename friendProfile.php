@@ -16,7 +16,7 @@
             	<li><a href="logout.php">Logout</a></li>
 				<li><a href="contacts.php">Contacts</a></li>
 				<li><a href="messages.php">Messages</a></li>
-				<li id="currentpage"><a href="">Profile</a></li>
+				<li><a href="userProfile.php">Profile</a></li>
 			</ul>
 		</div>
 		<br>
@@ -27,14 +27,7 @@
 include "./database.php";
 
 session_start();
-$user = "";
-if (isset($_COOKIE['username'])) {
-    $user = $_COOKIE['username'];
-}
-else {
-    header('Location: index.php');
-}
-
+$user = $_GET['userVar'];
 $sql = "SELECT * FROM Users WHERE username = '".$user."'";
 $results = executeStatement($sql);
 $username = $results[0][0];

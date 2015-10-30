@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="javascript.js"></script>
-		<title>Profile</title>
+		<title>Messages</title>
 	</head>
 
 	<body>
@@ -31,6 +31,7 @@
             <li><a href="logout.php">Logout</a></li>
             <li><a href="contacts.php">Contacts</a></li>
             <li class="active"><a href="">Messages</a></li>
+            <li><a href="userProfile.php">Profile</a></li>
 		</ul>
 
         <div id="messageContainer">
