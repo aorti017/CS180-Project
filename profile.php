@@ -67,7 +67,7 @@
 
                 $.ajax({
 					type: 'GET',
-					url: './messages.php',
+					url: './getMessages.php',
 					data: {username:username, recpUser: recpUser, time:t},
 					success: function(data){
 						/*TODO*/
