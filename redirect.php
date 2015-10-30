@@ -1,14 +1,13 @@
 <?php
     session_start();
 
-if($_SESSION['error']== "error")
-		{
+    if($_SESSION['error']== "error")
+    {
 		echo '<script language="javascript">';
-echo 'alert("User doesn\'t exist")';
-echo '</script>';
-			$_SESSION['error']="none";
-		}
-
+        echo 'alert("User doesn\'t exist")';
+        echo '</script>';
+		$_SESSION['error'] = "none";
+	}
 ?>
 <html>
 	<head>

@@ -1,11 +1,23 @@
 <?php
-
 include "./database.php";
-//$user = $_GET['user'];
-$user = "nikita";
+
+session_start();
+$user = "";
+if (isset($_COOKIE['username'])) {
+    $user = $_COOKIE['username'];
+}
+else {
+    header('Location: index.php');
+}
+
 $sql = "SELECT * FROM Users WHERE username = '".$user."'";
 $results = executeStatement($sql);
 $username = $results[0][0];
 echo $username;
 ?>
-hello
+
+<html>
+    <body>
+        hello
+    </body>
+</html>

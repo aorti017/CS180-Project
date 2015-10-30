@@ -33,5 +33,9 @@
 				<br>
 				<input type="submit" value="Create Account">
 		</form>
+
+        <form action="index.php" method="POST">
+    		<input type="submit" value="Cancel">
+        </form>
 	</body>
 </html>
