@@ -1,6 +1,6 @@
 <?php
     if (isset($_COOKIE['username'])) {
-        header('Location: profile.php');
+        header('Location: messages.php');
     }
     session_start();
     $_SESSION['error']="none";
