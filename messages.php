@@ -29,7 +29,7 @@
 	<body>
         <ul class="nav nav-pills">
             <li><a href="logout.php">Logout</a></li>
-            <li><a href="redirect.php">Contacts</a></li>
+            <li><a href="contacts.php">Contacts</a></li>
             <li class="active"><a href="">Messages</a></li>
 		</ul>
 
