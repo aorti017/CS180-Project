@@ -129,7 +129,7 @@
 				$.ajax(
 				{
 					type: 'GET',
-					url: './sendmessage.php',
+					url: './sendMessage.php',
 					data: {username:username, recpUser:recpUser, time:t , message:message}
 				});
 			});
