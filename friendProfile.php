@@ -42,5 +42,21 @@ echo "First name: $firstname <br>";
 echo "Last name: $lastname <br>";
 echo "Birthday: $birthday <br>";
 echo "Gender: $gender <br>";
-echo "Email: $email <br>";
 ?>
+<script type="text/javascript">
+var vars = {};
+var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	vars[key] = value;
+	});
+console.log(vars["userVar"]);
+var btn = document.createElement("BUTTON");
+btn.setAttribute("id", "contactBtn_");
+btn.setAttribute("value", vars["userVar"]);
+btn.onclick=function(){
+window.location.replace("./messages.php?contacts="+this.value);
+};
+var t = document.createTextNode(vars["userVar"]);
+btn.appendChild(t);
+document.body.appendChild(btn);
+</script>
+

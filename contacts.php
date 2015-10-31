@@ -46,8 +46,8 @@
                             btn.setAttribute("id", "contactBtn_");
                             btn.setAttribute("value", conts[i]);
                             btn.onclick=function(){
-                                window.location.replace("./messages.php?contacts="+this.value);
-                                //window.location.replace("friendProfile.php?userVar="+this.value);
+                                //window.location.replace("./messages.php?contacts="+this.value);
+                                window.location.replace("friendProfile.php?userVar="+this.value);
                             };
                             var t = document.createTextNode(conts[i]);
                             btn.appendChild(t);
