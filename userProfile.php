@@ -2,11 +2,8 @@
 include "./database.php";
 
 session_start();
-$user = "";
-if (isset($_COOKIE['username'])) {
-    $user = $_COOKIE['username'];
-}
-else {
+$user = $_GET["username"];
+if (!isset($_COOKIE['username'])) {
     header('Location: index.php');
 }
 
@@ -17,7 +14,7 @@ $firstname = $results[0][2];
 $lastname = $results[0][3];
 $birthday = $results[0][4];
 $gender = $results[0][5];
-$email = $email[0][6];
+$email = $results[0][6];
 
 echo $username;
 echo $firstname;
@@ -28,7 +25,9 @@ echo $email;
 ?>
 
 <html>
-    <body>
-        hello
-    </body>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<form action="./blockUser.php" method="get">
+<input type="button"value="Block User">
+
+</form>
 </html>
