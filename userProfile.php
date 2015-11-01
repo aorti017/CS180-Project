@@ -24,30 +24,47 @@
 </html>
 
 <?php
-include "./database.php";
+	include "./database.php";
+	session_start();
 
-session_start();
-$user = "";
-if (isset($_COOKIE['username'])) {
-    $user = $_COOKIE['username'];
-}
-else {
-    header('Location: index.php');
-}
+	$user = "";
+	if (isset($_COOKIE['username'])) {
+    	$user = $_COOKIE['username'];
+	}
+	else {
+    	header('Location: index.php');
+	}
 
-$sql = "SELECT * FROM Users WHERE username = '".$user."'";
-$results = executeStatement($sql);
-$username = $results[0][0];
-$firstname = $results[0][2];
-$lastname = $results[0][3];
-$birthday = $results[0][4];
-$gender = $results[0][5];
-$email = $email[0][6];
+	if($_SESSION['error'] == "updated")	//checks to see if an update was successful or not
+	{
+		echo "Your information has been updated!<br>";	//if it is, let user be notified
+		$_SESSION['error'] = "none";
+	}
+	else if($_SESSION['error'] == "password")	//if flag was set to password, then prompt user of error
+	{
+		echo "Password not long enough!<br>";
+		$_SESSION['error'] = "none";
+	}
 
-echo "User name: $username <br>";
-echo "First name: $firstname <br>";
-echo "Last name: $lastname <br>";
-echo "Birthday: $birthday <br>";
-echo "Gender: $gender <br>";
-echo "Email: $email <br>";
+	$sql = "SELECT * FROM Users WHERE username = '".$user."'";	//following lines extracts all of current users info
+	$results = executeStatement($sql);
+	$username = $results[0][0];
+	$firstname = $results[0][2];
+	$lastname = $results[0][3];
+	$birthday = $results[0][4];
+	$gender = $results[0][5];
+	$email = $email[0][6];
 ?>
+<html>
+	<body>
+	Username: <?php echo"$username"?> <br>
+	Password:<form action="getNewPassword.php" method="post">
+	<input type="submit" value="password">
+	</form>
+	First Name: <?php echo"$firstname"?> <br>
+	Last Name: <?php echo"$lastname"?> <br>
+	Birthday: <?php echo"$birthday"?> <br>
+	Gender: <?php echo"$gender"?> <br>
+	email: <?php echo"$email"?> <br>
+	</body>
+</html>
