@@ -16,7 +16,7 @@
             	<li><a href="logout.php">Logout</a></li>
 				<li><a href="contacts.php">Contacts</a></li>
 				<li><a href="messages.php">Messages</a></li>
-				<li id="currentpage"><a href="">Profile</a></li>
+				<li><a href="userProfile.php">Profile</a></li>
 			</ul>
 		</div>
 		<br>
@@ -27,11 +27,7 @@
 include "./database.php";
 
 session_start();
-$user = $_GET["username"];
-if (!isset($_COOKIE['username'])) {
-    header('Location: index.php');
-}
-
+$user = $_GET['userVar'];
 $sql = "SELECT * FROM Users WHERE username = '".$user."'";
 $results = executeStatement($sql);
 $username = $results[0][0];
@@ -39,12 +35,28 @@ $firstname = $results[0][2];
 $lastname = $results[0][3];
 $birthday = $results[0][4];
 $gender = $results[0][5];
-$email = $results[0][6];
+$email = $email[0][6];
 
 echo "User name: $username <br>";
 echo "First name: $firstname <br>";
 echo "Last name: $lastname <br>";
 echo "Birthday: $birthday <br>";
 echo "Gender: $gender <br>";
-echo "Email: $email <br>";
 ?>
+<script type="text/javascript">
+var vars = {};
+var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	vars[key] = value;
+	});
+console.log(vars["userVar"]);
+var btn = document.createElement("BUTTON");
+btn.setAttribute("id", "contactBtn_");
+btn.setAttribute("value", vars["userVar"]);
+btn.onclick=function(){
+window.location.replace("./messages.php?contacts="+this.value);
+};
+var t = document.createTextNode(vars["userVar"]);
+btn.appendChild(t);
+document.body.appendChild(btn);
+</script>
+
