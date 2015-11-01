@@ -45,6 +45,11 @@
 		echo "Password not long enough!<br>";
 		$_SESSION['error'] = "none";
 	}
+	else if($_SESSION['error'] == "date")	//if flag was set to date, then prompt user of error
+	{
+		echo "Birthday not proper input!<br>";
+		$_SESSION['error'] = "none";
+	}
 
 	$sql = "SELECT * FROM Users WHERE username = '".$user."'";	//following lines extracts all of current users info
 	$results = executeStatement($sql);
@@ -58,13 +63,30 @@
 <html>
 	<body>
 	Username: <?php echo"$username"?> <br>
+
 	Password:<form action="getNewPassword.php" method="post">
-	<input type="submit" value="password">
+	<input type="submit" value="Edit Password">
 	</form>
-	First Name: <?php echo"$firstname"?> <br>
-	Last Name: <?php echo"$lastname"?> <br>
-	Birthday: <?php echo"$birthday"?> <br>
-	Gender: <?php echo"$gender"?> <br>
-	email: <?php echo"$email"?> <br>
+	
+	First Name: <?php echo"$firstname"?> <form action="getNewFName.php" method="post">
+	<input type="submit" value="Edit First Name">
+	</form>
+	
+	Last Name: <?php echo"$lastname"?> <form action="getNewLName.php" method="post">
+	<input type="submit" value="Edit Last Name">
+	</form>
+	
+	Birthday: <?php echo"$birthday"?> <form action="getNewBday.php" method="post">
+	<input type="submit" value="Edit Birthday">
+	</form>
+
+	Gender: <?php echo"$gender"?> <form action="getNewGender.php" method="post">
+	<input type="submit" value="Edit Gender">
+	</form>
+
+	email: <?php echo"$email"?> <form action="getNewEmail.php" method="post">
+	<input type="submit" value="Edit Email">
+	</form>
+	
 	</body>
 </html>
