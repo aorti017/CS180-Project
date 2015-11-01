@@ -58,7 +58,7 @@
 	$lastname = $results[0][3];
 	$birthday = $results[0][4];
 	$gender = $results[0][5];
-	$email = $email[0][6];
+	$email = $results[0][6];
 ?>
 <html>
 	<body>
