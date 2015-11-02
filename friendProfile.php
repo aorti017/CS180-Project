@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-        <script src="javascript.js"></script>
+        	<script src="javascript.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -37,7 +37,7 @@ $birthday = $results[0][4];
 $gender = $results[0][5];
 $email = $email[0][6];
 
-echo "User name: $username <br>";
+echo "User name: $username<br>";
 echo "First name: $firstname <br>";
 echo "Last name: $lastname <br>";
 echo "Birthday: $birthday <br>";
@@ -58,5 +58,19 @@ window.location.replace("./messages.php?contacts="+this.value);
 var t = document.createTextNode(vars["userVar"]);
 btn.appendChild(t);
 document.body.appendChild(btn);
+
+var blockBtn = document.createElement("BUTTON");
+blockBtn.setAttribute("id", vars["userVar"]);
+blockBtn.setAttribute("value", parse());
+blockBtn.onclick=function(){
+	$.ajax({
+		type:'GET',
+		url: './blockUser.php',
+		data: {username: this.value, contact: this.id}
+	});
+};
+var newT = document.createTextNode("Block User");
+blockBtn.appendChild(newT);
+document.body.appendChild(blockBtn);
 </script>
 
