@@ -94,20 +94,23 @@
 								return a.time - b.time;
 							});
 							for(i = 0; i < messages.length; i++){
-								$('#messageContainer').append(messages[i].message + "<br>");
-                                console.log(messages[i].message);
+								if(messages[i].type == 'r'){
+									$('#messageContainer').append(obj.receiver + ": " + messages[i].message + "<br>");
+								}
+								else{
+									$('#messageContainer').append(obj.sender + ": " + messages[i].message + "<br>");
+
+								}
 							}
-						}
-						else{
+			}
+			else{
 							var messageSent = obj.messageSent;
 							var messageReceived = obj.messageReceived;
 							if(messageSent == "" && messageReceived != ""){
-								$('#messageContainer').append(messageReceived[0] + "<br>");
-                                console.log(messageReceived[0]);
+								$('#messageContainer').append(obj.receiver + ": " + messageReceived[0] + "<br>");
 							}
 							else if(messageReceived == "" && messageSent != ""){
-								$('#messageContainer').append(messageSent[0] + "<br>");
-                                console.log(messageSent[0]);
+								$('#messageContainer').append(obj.sender + ": " + messageSent[0] + "<br>");
 							}
 						}
 						getNewMessages(obj.timestamp, recpUser);
