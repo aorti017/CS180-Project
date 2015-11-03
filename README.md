@@ -11,3 +11,5 @@ TODO
 * Add comments
 * Start documentation
 * Organize files
+* After blocking refresh page and indicate they are blocked
+* Let user update their status
