@@ -72,7 +72,7 @@ blockBtn.onclick=function(){
 		data: {username: this.value, contact: this.id}
 	});
 };
-var newT = document.createTextNode("Block User");
+var newT = document.createTextNode("Block/Unblock User");
 blockBtn.appendChild(newT);
 document.body.appendChild(blockBtn);
 </script>
