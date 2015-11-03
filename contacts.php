@@ -27,6 +27,7 @@
             	<li><a href="logout.php">Logout</a></li>
 				<li id="currentpage"><a href="">Contacts</a></li>
 				<li><a href="messages.php">Messages</a></li>
+				<li><a href="actualMessageList.php">MessageList</a></li>
 				<li><a id="userProf">Profile</a></li>
 			</ul>
 		</div>

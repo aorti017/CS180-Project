@@ -68,12 +68,10 @@ $messageReceiver = array();
 $messageTimestamp = array();
 foreach($messageList as $resluts)
 {
-
-	array_push($messageSenders, resluts->sender);
-	array_push($messageReceiver, resluts->receiver);
-	array_push($messageTimestamp, resluts->timestamp);
+	array_push($messageSenders, $resluts->sender);
+	array_push($messageReceiver, $resluts->receiver);
+	array_push($messageTimestamp, $resluts->timestamp);
 }
-
 $ret = array('sender'=>$messageSenders, 'receiver'=>$messageReceiver,'timestamp'=>$messageTimestamp);
 $json = json_encode($ret);
 echo $json;
