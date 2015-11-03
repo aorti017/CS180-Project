@@ -31,7 +31,7 @@
             <li><a href="logout.php">Logout</a></li>
             <li><a href="contacts.php">Contacts</a></li>
             <li class="active"><a href="">Messages</a></li>
-            <li><a href="userProfile.php">Profile</a></li>
+            <li><a id="userProf">Profile</a></li>
 		</ul>
 
         <div id="messageContainer">
@@ -139,6 +139,7 @@
 			});
 
             $(function(){
+	        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
 				var time = null;
                 var recpUser = getUrlVars()['contacts'];
 				getNewMessages(time, recpUser);
