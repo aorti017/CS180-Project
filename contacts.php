@@ -28,6 +28,7 @@
 				<li id="currentpage"><a href="">Contacts</a></li>
 				<li><a href="messages.php">Messages</a></li>
 				<li><a href="actualMessageList.php">MessageList</a></li>
+				<li><a id="userProf">Profile</a></li>
 			</ul>
 		</div>
 		<br>
@@ -46,7 +47,8 @@
                             btn.setAttribute("id", "contactBtn_");
                             btn.setAttribute("value", conts[i]);
                             btn.onclick=function(){
-                                window.location.replace("./messages.php?contacts="+this.value);
+                                //window.location.replace("./messages.php?contacts="+this.value);
+                                window.location.replace("profile.php?userVar="+this.value);
                             };
                             var t = document.createTextNode(conts[i]);
                             btn.appendChild(t);
@@ -57,6 +59,7 @@
             }
 
             $(function(){
+		document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
                 getContacts();
 
             });

@@ -34,7 +34,9 @@
 				'messageSentTime'=>$oldMessagesTimeS,
                 		'messageReceived'=>$oldMessagesReceived,
 				'messageReceivedTime'=>$oldMessagesTimeR,
-				'timestamp'=>$time
+				'timestamp'=>$time,
+				'sender'=>$sender,
+				'receiver'=>$receiver
 			);
 			$json = json_encode($ret);
 			echo $json;
@@ -71,7 +73,9 @@
 				$ret = array(
 					'messageSent'=>$newMessagesSent,
                     			'messageReceived'=>$newMessagesReceived,
-					'timestamp'=>$newTimeStamp
+					'timestamp'=>$newTimeStamp,
+					'sender'=>$sender,
+					'receiver'=>$receiver
 				);
 
 				$json = json_encode($ret);
@@ -81,7 +85,9 @@
 				$ret = array(
 					'messageSent'=>"",
                     			'messageReceived'=>"",
-					'timestamp'=>$lastTimeStamp
+					'timestamp'=>$lastTimeStamp,
+					'sender'=>$sender,
+					'receiver'=>$receiver
 				);
 				$json = json_encode($ret);
 				echo $json;

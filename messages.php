@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="javascript.js"></script>
-		<title>Profile</title>
+		<title>Messages</title>
 	</head>
 
 	<body>
@@ -31,6 +31,7 @@
             <li><a href="logout.php">Logout</a></li>
             <li><a href="contacts.php">Contacts</a></li>
             <li class="active"><a href="">Messages</a></li>
+            <li><a id="userProf">Profile</a></li>
 		</ul>
 
         <div id="messageContainer">
@@ -93,20 +94,23 @@
 								return a.time - b.time;
 							});
 							for(i = 0; i < messages.length; i++){
-								$('#messageContainer').append(messages[i].message + "<br>");
-                                console.log(messages[i].message);
+								if(messages[i].type == 'r'){
+									$('#messageContainer').append(obj.receiver + ": " + messages[i].message + "<br>");
+								}
+								else{
+									$('#messageContainer').append(obj.sender + ": " + messages[i].message + "<br>");
+
+								}
 							}
-						}
-						else{
+			}
+			else{
 							var messageSent = obj.messageSent;
 							var messageReceived = obj.messageReceived;
 							if(messageSent == "" && messageReceived != ""){
-								$('#messageContainer').append(messageReceived[0] + "<br>");
-                                console.log(messageReceived[0]);
+								$('#messageContainer').append(obj.receiver + ": " + messageReceived[0] + "<br>");
 							}
 							else if(messageReceived == "" && messageSent != ""){
-								$('#messageContainer').append(messageSent[0] + "<br>");
-                                console.log(messageSent[0]);
+								$('#messageContainer').append(obj.sender + ": " + messageSent[0] + "<br>");
 							}
 						}
 						getNewMessages(obj.timestamp, recpUser);
@@ -135,6 +139,7 @@
 			});
 
             $(function(){
+	        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
 				var time = null;
                 var recpUser = getUrlVars()['contacts'];
 				getNewMessages(time, recpUser);
