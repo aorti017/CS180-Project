@@ -47,23 +47,22 @@ echo "Status: $status <br>";
 ?>
 <script type="text/javascript">
 document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
-var vars = {};
-var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-	vars[key] = value;
-	});
-console.log(vars["userVar"]);
+//gets the userVar GET variable from the URL
+var parts = window.location.href;
+var userVar = parts.substring(parts.indexOf("=")+1, parts.length);
+
 var btn = document.createElement("BUTTON");
 btn.setAttribute("id", "contactBtn_");
-btn.setAttribute("value", vars["userVar"]);
+btn.setAttribute("value", userVar);
 btn.onclick=function(){
 window.location.replace("./messages.php?contacts="+this.value);
 };
-var t = document.createTextNode(vars["userVar"]);
+var t = document.createTextNode(userVar);
 btn.appendChild(t);
 document.body.appendChild(btn);
 
 var blockBtn = document.createElement("BUTTON");
-blockBtn.setAttribute("id", vars["userVar"]);
+blockBtn.setAttribute("id", userVar);
 blockBtn.setAttribute("value", parse());
 blockBtn.onclick=function(){
 	$.ajax({
