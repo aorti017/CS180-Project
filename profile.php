@@ -61,18 +61,20 @@ var t = document.createTextNode(userVar);
 btn.appendChild(t);
 document.body.appendChild(btn);
 
-var blockBtn = document.createElement("BUTTON");
-blockBtn.setAttribute("id", userVar);
-blockBtn.setAttribute("value", parse());
-blockBtn.onclick=function(){
-	$.ajax({
-		type:'GET',
-		url: './blockUser.php',
-		data: {username: this.value, contact: this.id}
-	});
-};
+if(parse() != userVar){
+	var blockBtn = document.createElement("BUTTON");
+	blockBtn.setAttribute("id", userVar);
+	blockBtn.setAttribute("value", parse());
+	blockBtn.onclick=function(){
+		$.ajax({
+			type:'GET',
+			url: './blockUser.php',
+			data: {username: this.value, contact: this.id}
+		});
+	};
 var newT = document.createTextNode("Block/Unblock User");
 blockBtn.appendChild(newT);
 document.body.appendChild(blockBtn);
+}
 </script>
 
