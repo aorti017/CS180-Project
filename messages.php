@@ -46,7 +46,7 @@
             //http://papermashup.com/read-url-get-variables-withjavascript/
             function getUrlVars() {
                 var parts = window.location.href;
-		var vars = parts.substring(parts.indexOf("=")+1, parts.length); 
+		        var vars = parts.substring(parts.indexOf("=")+1, parts.length);
                 return vars;
             }
 
@@ -125,7 +125,7 @@
 				//clears the textarea after a message is sent
 				document.getElementById("newMessage").value="";
 				var username = parse();
-                var recpUser = getUrlVars()['contacts'];
+                var recpUser = getUrlVars();
 				var t = (new Date).getTime();
 
 				$.ajax(
@@ -139,7 +139,7 @@
             $(function(){
 	        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
 				var time = null;
-                var recpUser = getUrlVars()['contacts'];
+                var recpUser = getUrlVars();
 				getNewMessages(time, recpUser);
             });
 		</script>
