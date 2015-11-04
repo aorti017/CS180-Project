@@ -59,3 +59,10 @@
 
 </body>
 </html>
+
+<html>
+	<form action="./messages.php" type="GET">
+	Create new message:
+	<input type="text" name="contacts">
+	</form>
+</html>
