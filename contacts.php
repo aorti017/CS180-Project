@@ -8,6 +8,13 @@
         echo '</script>';
 		$_SESSION['error'] = "none";
 	}
+
+    if(!isset($_COOKIE['username'])) {
+        header('Location: index.php');
+    }
+
+    setcookie('username', $_SESSION['username'], 0);
+
 ?>
 <html>
 	<head>
@@ -26,8 +33,7 @@
         	<ul>
             	<li><a href="logout.php">Logout</a></li>
 				<li id="currentpage"><a href="">Contacts</a></li>
-				<li><a href="messages.php">Messages</a></li>
-				<li><a href="actualMessageList.php">MessageList</a></li>
+				<li><a href="actualMessageList.php">Message List</a></li>
 				<li><a id="userProf">Profile</a></li>
 			</ul>
 		</div>
@@ -59,7 +65,7 @@
             }
 
             $(function(){
-		document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
+		        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
                 getContacts();
 
             });

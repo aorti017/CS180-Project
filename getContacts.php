@@ -1,4 +1,11 @@
 <?php
+    session_start();
+    if(!isset($_COOKIE['username'])) {
+        header('Location: index.php');
+    }
+
+    setcookie('username', $_SESSION['username'], 0);
+
     include './database.php';
     //gets the username for the logged in user
     $username = $_GET['username'];

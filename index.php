@@ -1,8 +1,9 @@
 <?php
-    if (isset($_COOKIE['username'])) {
-        header('Location: messages.php');
-    }
     session_start();
+    if (isset($_COOKIE['username'])) {
+        header('Location: contacts.php');
+    }
+
     $_SESSION['error']="none";
 ?>
 

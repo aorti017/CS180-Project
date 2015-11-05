@@ -27,7 +27,10 @@
 			$passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $statement = "INSERT INTO Users (username, password, firstname, lastname, birthday, gender, email) VALUE('".$_POST["username"]."', '".$passwordHash."', '".$_POST["firstname"]."', '".$_POST["lastname"]."', '".$_POST["birthdate"]."', '".$_POST["gender"]."', '".$_POST["email"]."')";
 			executeStatement($statement);
-			echo "Your account has been created";
+
+            setcookie('username', $_POST["username"], 0);
+            $_SESSION["username"] = $_POST["username"];
+            header('Location: contacts.php');
 		}
 	}
 	else{

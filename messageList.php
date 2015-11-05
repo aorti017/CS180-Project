@@ -11,7 +11,7 @@ class MessageItem
 		$this->receiver = $receiverr;
 		$this->timestamp = $timestampp;
 	}
-	
+
 	function printer()
 	{
 		//this prints out the values for debugging
@@ -33,9 +33,11 @@ session_start();
 if(!isset($_COOKIE['username'])) {
 	header('Location: index.php');
 }
+// else set the logged in user in the cookies
+setcookie('username', $_SESSION['username'], 0);
 
 include './database.php';
-$statement = "select distinct sender, receiver, timestamp FROM Messages WHERE sender ='" . $_COOKIE['username'] ."'" . " or sender ='" . $_COOKIE['username'] ."'" . " ORDER BY timestamp DESC" ;
+$statement = "select distinct sender, receiver, timestamp FROM Messages WHERE sender ='" . $_COOKIE['username'] ."'" . " or receiver ='" . $_COOKIE['username'] ."'" . " ORDER BY timestamp DESC" ;
 //SQL statement that gets all of the messages that the user has sent/received and ordres them by timestamp
 $results = executeStatement($statement);
 $messageList = array();
@@ -53,7 +55,7 @@ foreach($results as $val){
 			{
 				$setflag = 1;
 			}
-		
+
 	}
 
 	if($setflag == 0)

@@ -30,8 +30,9 @@
         <ul class="nav nav-pills">
             <li><a href="logout.php">Logout</a></li>
             <li><a href="contacts.php">Contacts</a></li>
-            <li class="active"><a href="">Messages</a></li>
+            <li><a href="actualMessageList.php">Message List</a></li>
             <li><a id="userProf">Profile</a></li>
+            <li class="active"><a href="">Messages</a></li>
 		</ul>
 
         <div id="messageContainer">
