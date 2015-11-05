@@ -15,8 +15,8 @@
         	<ul>
             	<li><a href="logout.php">Logout</a></li>
 				<li><a href="contacts.php">Contacts</a></li>
-				<li><a href="messages.php">Messages</a></li>
-				<li><a id="userProf">Profile</a></li>
+				<li><a href="actualMessageList.php">MessageList</a></li>
+				<li id="currentpage"><a id="userProf">Profile</a></li>
 			</ul>
 		</div>
 		<br>
@@ -24,26 +24,31 @@
 </html>
 
 <?php
-include "./database.php";
+    include "./database.php";
 
-session_start();
-$user = $_GET['userVar'];
-$sql = "SELECT * FROM Users WHERE username = '".$user."'";
-$results = executeStatement($sql);
-$username = $results[0][0];
-$firstname = $results[0][2];
-$lastname = $results[0][3];
-$birthday = $results[0][4];
-$gender = $results[0][5];
-$email = $results[0][6];
-$status = $results[0][7];
-echo "<br>User name: $username<br>";
-echo "Email: $email <br>";
-echo "First name: $firstname <br>";
-echo "Last name: $lastname <br>";
-echo "Birthday: $birthday <br>";
-echo "Gender: $gender <br>";
-echo "Status: $status <br>";
+    session_start();
+    if(!isset($_COOKIE['username'])) {
+        header('Location: index.php');
+    }
+    setcookie("username", $_SESSION['username'], 0);
+
+    $user = $_GET['userVar'];
+    $sql = "SELECT * FROM Users WHERE username = '".$user."'";
+    $results = executeStatement($sql);
+    $username = $results[0][0];
+    $firstname = $results[0][2];
+    $lastname = $results[0][3];
+    $birthday = $results[0][4];
+    $gender = $results[0][5];
+    $email = $results[0][6];
+    $status = $results[0][7];
+    echo "<br>User name: $username<br>";
+    echo "Email: $email <br>";
+    echo "First name: $firstname <br>";
+    echo "Last name: $lastname <br>";
+    echo "Birthday: $birthday <br>";
+    echo "Gender: $gender <br>";
+    echo "Status: $status <br>";
 ?>
 <script type="text/javascript">
 document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());

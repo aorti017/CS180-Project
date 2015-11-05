@@ -1,6 +1,13 @@
 <?php
     session_start();
     include './database.php';
+
+    if(!isset($_COOKIE['username'])) {
+        header('Location: index.php');
+    }
+
+    setcookie('username', $_SESSION['username'], 0);
+
     //grab the name of the user the logged in user wants to add
     $contact = $_GET['contact'];
     //get currently logged in user
