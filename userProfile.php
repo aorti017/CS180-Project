@@ -15,11 +15,15 @@
         	<ul>
             	<li><a href="logout.php">Logout</a></li>
 				<li><a href="contacts.php">Contacts</a></li>
-				<li><a href="actualMessageList.php">MessageList</a></li>
-				<li id="currentpage"><a href="">Profile</a></li>
-			</ul>
+				<li><a href="actualMessageList.php">Message List</a></li>
+				<li id="currentpage"><a href="">My Profile</a></li>
+                <li><a id="userProf">Profile</a></li>
+            </ul>
 		</div>
 		<br>
+    <script type="text/javascript">
+        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
+    </script>
     </body>
 </html>
 
@@ -62,20 +66,21 @@
 ?>
 <html>
 	<body>
+    <br>
 	Username: <?php echo"$username"?> <br>
 
 	Password:<form action="getNewPassword.php" method="post">
 	<input type="submit" value="Edit Password">
 	</form>
-	
+
 	First Name: <?php echo"$firstname"?> <form action="getNewFName.php" method="post">
 	<input type="submit" value="Edit First Name">
 	</form>
-	
+
 	Last Name: <?php echo"$lastname"?> <form action="getNewLName.php" method="post">
 	<input type="submit" value="Edit Last Name">
 	</form>
-	
+
 	Birthday: <?php echo"$birthday"?> <form action="getNewBday.php" method="post">
 	<input type="submit" value="Edit Birthday">
 	</form>
@@ -84,9 +89,9 @@
 	<input type="submit" value="Edit Gender">
 	</form>
 
-	email: <?php echo"$email"?> <form action="getNewEmail.php" method="post">
+	Email: <?php echo"$email"?> <form action="getNewEmail.php" method="post">
 	<input type="submit" value="Edit Email">
 	</form>
-	
+
 	</body>
 </html>
