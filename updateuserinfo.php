@@ -42,8 +42,14 @@
 	if($_POST['updatebirthdate'] != '')
 	{
 		$birthday = $_POST['updatebirthdate'];
-		$sql = "UPDATE Users SET birthday= '".$birthday."' WHERE username = '".$userVar."'"; //update birthday
-		$results = executeStatement($sql);
+		$year = intval($birthday[0] . $birthday[1] . $birthday[2] . $birthday[3]);
+        $month = intval($birthday[5] . $birthday[6]);
+        $day = intval($birthday[8] . $birthday[9]);
+        if (checkdate($month, $day, $year))
+        {
+			$sql = "UPDATE Users SET birthday= '".$birthday."' WHERE username = '".$userVar."'"; //update birthday
+			$results = executeStatement($sql);
+		}
 	}
 	if($_POST['updategender'] != '')
 	{
