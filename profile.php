@@ -9,18 +9,17 @@
 		<title>Home</title>
 		<link rel="stylesheet" type="text/css" href="navigation.css">
 	</head>
-
 	<body>
 		<div id="navigation">
         	<ul>
             	<li><a href="logout.php">Logout</a></li>
 				<li><a href="contacts.php">Contacts</a></li>
 				<li><a href="actualMessageList.php">Message List</a></li>
-				<li><a href="userProfile.php">My Profile</a></li>
                 <li id="currentpage"><a id="userProf">Profile</a></li>
 			</ul>
 		</div>
 		<br>
+		<form action="getnewinfo.php" method="post"><input type="submit" value="Edit Settings"></form>
     </body>
 </html>
 
