@@ -19,6 +19,7 @@
 			</ul>
 		</div>
 		<br>
+		<br>
 		<form action="getnewinfo.php" method="post"><input type="submit" value="Edit Settings"></form>
     </body>
 </html>
