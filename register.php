@@ -1,11 +1,11 @@
 <?php
     session_start();
 	if ($_SESSION['error'] == "err") {
-		echo "Please fill out all the input fields";
+		echo '<div class="error">Please fill out all the input fields</div>';
 		$_SESSION['error'] = "none";
 	}
     elseif ($_SESSION['error'] == "date") {
-        echo "Please fill out your birthday according to the specified format";
+        echo '<div class="error">Please use a proper date in the proper format</div>';
         $_SESSION['error'] = "none";
     }
 ?>

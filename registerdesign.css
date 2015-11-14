@@ -102,3 +102,8 @@ input[type="submit"]:hover{
     top:0px;
 }
 
+.error {
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('error.png');
+}
