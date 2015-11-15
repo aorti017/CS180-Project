@@ -11,15 +11,16 @@
     </head>
 
 <body>
-    <div id="navigation">
-        <ul>
-            <li><a href="logout.php">Logout</a></li>
-            <li><a href="contacts.php">Contacts</a></li>
-            <li id="currentpage"><a href="actualMessageList.php">Message List</a></li>
-            <li><a id="userProf">Profile</a></li>
-        </ul>
+    <div>
+		<nav class="main-menu">
+        	<ul>
+            	<li><a href="logout.php">Logout</a></li>
+            	<li><a href="contacts.php">Contacts</a></li>
+            	<li id="currentpage"><a href="actualMessageList.php">Message List</a></li>
+            	<li><a id="userProf">Profile</a></li>
+        	</ul>
+        </nav>
     </div>
-    <br>
     <br>
     <?php
         // goes to the home page if no one is logged in

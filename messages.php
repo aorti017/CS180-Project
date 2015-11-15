@@ -23,19 +23,23 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="javascript.js"></script>
+		<link rel="stylesheet" href="navigation.css">
 		<title>Messages</title>
 	</head>
 
 	<body>
-        <ul class="nav nav-pills">
-            <li><a href="logout.php">Logout</a></li>
-            <li><a href="contacts.php">Contacts</a></li>
-            <li><a href="actualMessageList.php">Message List</a></li>
-            <li><a id="userProf">Profile</a></li>
-            <li class="active"><a href="">Messages</a></li>
-		</ul>
-
-        <div id="messageContainer">
+		<div>
+			<nav class="main-menu">
+        		<ul>
+            		<li><a href="logout.php">Logout</a></li>
+            		<li><a href="contacts.php">Contacts</a></li>
+            		<li><a href="actualMessageList.php">Message List</a></li>
+            		<li><a id="userProf">Profile</a></li>
+            		<li id="currentpage"><a href="">Messages</a></li>
+				</ul>
+				<br>
+        		<div id="messageContainer">
+        	</nav>
         </div>
 
         <textarea id="newMessage" rows="5" cols="40"></textarea>
