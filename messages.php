@@ -24,7 +24,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="javascript.js"></script>
 		<link rel="stylesheet" href="navigation.css">
-		<title>Messages</title>
+		<link rel="stylesheet" href="messageDesign.css">
+        <title>Messages</title>
 	</head>
 
 	<body>
@@ -38,12 +39,17 @@
             		<li id="currentpage"><a href="">Messages</a></li>
 				</ul>
 				<br>
-        		<div id="messageContainer">
+                <div style="margin: 0px 500px 0px 500px;">
+                    <div class="messageWrapper">
+                        <div id="messageContainer"></div>
+                        <div class="sendMessageDiv">
+                            <textarea id="newMessage" rows="5" style="width: 100%;"></textarea>
+                            <button class="sendMessage" id="send">Send</button>
+                        </div>
+                    </div>
+                </div>
         	</nav>
         </div>
-
-        <textarea id="newMessage" rows="5" cols="40"></textarea>
-		<button id="send">Send</button>
 
 		<script type="text/javascript">
             //used to get the GET variables
@@ -98,24 +104,38 @@
 							});
 							for(i = 0; i < messages.length; i++){
 								if(messages[i].type == 'r'){
-									$('#messageContainer').append(obj.receiver + ": " + messages[i].message + "<br>");
-								}
+									//$('#messageContainer').append(obj.receiver + ": " + messages[i].message + "<br>");
+                                    var format = "<div class='bubbleFrom'><p>" + messages[i].message + "</p></div>";
+								    $('#messageContainer').append(format);
+                                }
 								else{
-									$('#messageContainer').append(obj.sender + ": " + messages[i].message + "<br>");
-
-								}
+                                    //$('#messageContainer').append(obj.sender + ": " + messages[i].message + "<br>");
+                                    var format = "<div class='bubbleTo'><p>" + messages[i].message + "</p></div>";
+								    $('#messageContainer').append(format);
+                                }
 							}
-			}
-			else{
+                            var bottomOfMessages = document.getElementById("messageContainer");
+                            bottomOfMessages.scrollTop = bottomOfMessages.scrollHeight;
+			            }
+			            else{
 							var messageSent = obj.messageSent;
 							var messageReceived = obj.messageReceived;
 							if(messageSent == "" && messageReceived != ""){
-								$('#messageContainer').append(obj.receiver + ": " + messageReceived[0] + "<br>");
-							}
+                                //$('#messageContainer').append(obj.receiver + ": " + messageReceived[0] + "<br>");
+                                var format = "<div class='bubbleFrom'><p>" + messageReceived[0] + "</p></div>";
+						        $('#messageContainer').append(format);
+                                var bottomOfMessages = document.getElementById("messageContainer");
+                                bottomOfMessages.scrollTop = bottomOfMessages.scrollHeight;
+                            }
 							else if(messageReceived == "" && messageSent != ""){
-								$('#messageContainer').append(obj.sender + ": " + messageSent[0] + "<br>");
-							}
+								//$('#messageContainer').append(obj.sender + ": " + messageSent[0] + "<br>");
+							    var format = "<div class='bubbleTo'><p>" + messageSent[0] + "</p></div>";
+						        $('#messageContainer').append(format);
+                                var bottomOfMessages = document.getElementById("messageContainer");
+                                bottomOfMessages.scrollTop = bottomOfMessages.scrollHeight;
+                            }
 						}
+
 						getNewMessages(obj.timestamp, recpUser);
 					}
 				});
@@ -142,7 +162,7 @@
 			});
 
             $(function(){
-	        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
+	            document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
 				var time = null;
                 var recpUser = getUrlVars();
 				getNewMessages(time, recpUser);
