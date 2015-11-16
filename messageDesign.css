@@ -1,0 +1,83 @@
+.bubbleFrom {
+    position:relative;
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 2px;
+    background-color: #999999;
+    color: #FFFFFF;
+    font: normal 12px "Segoe UI", Arial, Sans-serif;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 10px solid #999999;
+    float: left;
+}
+.bubbleFrom p {
+    font-size: 1.25em;
+}
+.bubbleFrom:after {
+    content: "\0020";
+    display:block;
+    position:absolute;
+    top:-20px;
+    left:20px;
+    z-index:2;
+    width: 0;
+    height: 0;
+    overflow:hidden;
+    border-top: 0;
+    border-bottom-color:#FFF;
+}
+
+.bubbleTo {
+    position:relative;
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 2px;
+    background-color: #337AB7;
+    color: #FFFFFF;
+    font: normal 12px "Segoe UI", Arial, Sans-serif;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 10px solid #337AB7;
+    float: right;
+}
+.bubbleTo p {
+    font-size: 1.25em;
+}
+.bubbleTo:after {
+    content: "\0020";
+    display:block;
+    position:absolute;
+    top:-20px;
+    left:20px;
+    z-index:2;
+    width: 0;
+    height: 0;
+    overflow:hidden;
+    border-top: 0;
+    border-bottom-color:#FFF;
+}
+
+.sendMessageDiv {
+    display: inline-block;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.sendMessage {
+    display: block;
+}
+
+#messageContainer {
+    height: 500px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+
+.messageWrapper {
+    background-color: #F2F2F2;
+    margin: 0px 25% 0px 25%;
+}
