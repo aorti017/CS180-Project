@@ -39,7 +39,7 @@
             		<li id="currentpage"><a href="">Messages</a></li>
 				</ul>
 				<br>
-                <div style="margin: 0px 500px 0px 500px;">
+                <div style="margin: 0px 25% 0px 25%;">
                     <div class="messageWrapper">
                         <div id="messageContainer"></div>
                         <div class="sendMessageDiv">
