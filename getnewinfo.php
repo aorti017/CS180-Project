@@ -1,7 +1,7 @@
 <?php
 	include "./database.php";
 	session_start();
-	
+
 	$userVar = "";
 	if (isset($_COOKIE['username'])) {
     	$userVar = $_COOKIE['username'];
@@ -31,9 +31,22 @@
 				<input type="submit" value="Update">
 		</form>
 
+        <form action="deleteAccount.php" method="POST" onsubmit="return confirm('Are you sure you want to delete your account?');">
+            <!--<button type="button" onclick="confirmDelete();">Delete Account</button>
+            <input type="hidden" id="confirmation" name="confirmation" value="">-->
+            <input type="submit" value="Delete Account">
+        </form>
+
 		<form action="profile.php?userVar=<?php echo $userVar?>" method="post">
     		<input type="submit" value="Cancel">
         </form>
 	</body>
 
 </html>
+<!--
+<script type="text/javascript">
+    function confirmDelete() {
+        var x = confirm('Are you sure you want to delete your account?');
+        document.getElementById('confirmation').value = x;
+    }
+</script>-->
