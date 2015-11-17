@@ -1,3 +1,9 @@
+body {
+	    background: url('http://3.bp.blogspot.com/-JgkeAcF2gz8/UiAblbCTg_I/AAAAAAAAKRU/8T-B0Jc2aQs/s1600/Background-Web3.jpg') no-repeat fixed center center;
+        background-size: cover;
+        font-family: Montserrat;
+}
+
 .bubbleFrom {
     position:relative;
     width: 90%;
