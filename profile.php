@@ -20,7 +20,6 @@
 				</ul>
 			</nav>
 		</div>
-		<form action="getnewinfo.php" method="post"><input type="submit" value="Edit Settings"></form>
     </body>
 </html>
 
@@ -32,7 +31,11 @@
         header('Location: index.php');
     }
     setcookie("username", $_SESSION['username'], 0);
-
+	
+	if($_GET['userVar'] == $_COOKIE['username'])
+	{
+		echo "<html><form action='getnewinfo.php' method='post'><input type='submit' value='Edit Settings'></form></html>";
+	}
     $user = $_GET['userVar'];
     $sql = "SELECT * FROM Users WHERE username = '".$user."'";
     $results = executeStatement($sql);
