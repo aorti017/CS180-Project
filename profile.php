@@ -1,3 +1,23 @@
+<?php
+    include "./database.php";
+
+    session_start();
+    if(!isset($_COOKIE['username'])) {
+        header('Location: index.php');
+    }
+    setcookie("username", $_SESSION['username'], 0);
+	
+    $user = $_GET['userVar'];
+    $sql = "SELECT * FROM Users WHERE username = '".$user."'";
+    $results = executeStatement($sql);
+    $username = $results[0][0];
+    $firstname = $results[0][2];
+    $lastname = $results[0][3];
+    $birthday = $results[0][4];
+    $gender = $results[0][5];
+    $email = $results[0][6];
+    $status = $results[0][7];
+?>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -24,11 +44,11 @@
 	<div class="twitter-widget">
 		<div class="header cf">
 			<a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
-			<h2>Edwin Delgado @kayrel</h2>
-			<p>I do not recall how I came into existence.<br>Something to do with my dad and mom.</p>
+			<h2><?php echo $firstname?> <?php echo $lastname ?> @<?php echo $username ?></h2>
+			<p><?php echo $status ?></p>
 		</div>
 		<div class="stats cf">
-			<a href="#" class="stat"><strong>1,250</strong>tweets</a>
+			<a class="stat"><strong><?php echo $birthday ?></strong>Birthday</a>
 			<a href="#" class="stat"><strong>60</strong>following</a>
 			<a href="#" class="stat"><strong>117</strong>followers</a>
 		</div>
@@ -36,42 +56,11 @@
 			<li><a href="#" class="ico-compose">Compose</a></li>
 			<li><a href="#" class="ico-mentions">Mentions</a></li>
 			<li><a href="#" class="ico-profile">Profile</a></li>
-			<li><a href="#" class="ico-settings">Settings</a></li>
+			<?php if($_GET['userVar'] == $_COOKIE['username']){ echo "<li><a href='getnewinfo.php' class='ico-settings'>Settings</a></li>";}?>
 		</ul>
 	</div>
 </html>
 
-<?php
-    include "./database.php";
-
-    session_start();
-    if(!isset($_COOKIE['username'])) {
-        header('Location: index.php');
-    }
-    setcookie("username", $_SESSION['username'], 0);
-	
-	if($_GET['userVar'] == $_COOKIE['username'])
-	{
-		echo "<html><form action='getnewinfo.php' method='post'><input type='submit' value='Edit Settings'></form></html>";
-	}
-    $user = $_GET['userVar'];
-    $sql = "SELECT * FROM Users WHERE username = '".$user."'";
-    $results = executeStatement($sql);
-    $username = $results[0][0];
-    $firstname = $results[0][2];
-    $lastname = $results[0][3];
-    $birthday = $results[0][4];
-    $gender = $results[0][5];
-    $email = $results[0][6];
-    $status = $results[0][7];
-    echo "<br>User name: $username<br>";
-    echo "Email: $email <br>";
-    echo "First name: $firstname <br>";
-    echo "Last name: $lastname <br>";
-    echo "Birthday: $birthday <br>";
-    echo "Gender: $gender <br>";
-    echo "Status: $status <br>";
-?>
 <script type="text/javascript">
     document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
     //gets the userVar GET variable from the URL
