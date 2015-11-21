@@ -42,8 +42,8 @@
 		</div>
         <div class="twitter-widget">
             <div class="header cf">
-                <a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
-                <h2><?php echo $firstname?> <?php echo $lastname ?> @<?php echo $username ?></h2>
+                <a href="https://www.facebook.com/" target="_blank" class="avatar"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" alt="Edwin Delgado"></a>
+                <h2><?php echo $firstname?> <?php echo $lastname ?></h2>
                 <p><?php echo $status ?><br>Contact email: <?php if($email!=null) {echo $email;} else {echo "N/A";}?></p>
             </div>
             <div class="stats cf">
