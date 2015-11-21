@@ -48,7 +48,9 @@
         <div id="friends">
         </div>
         <div style="margin: -84px 25% 0px 25%;">
-            <p id="currentFriend" align="center" style="color: #FFFFFF;"></p>
+            <div id="currentFriendWrapper">
+                <a id="currentFriend"></a>
+            </div>
             <div class="messageWrapper">
                 <div id="messageContainer"></div>
                 <div class="sendMessageDiv">
@@ -75,9 +77,21 @@
                         if (!(senders.length == 1 && senders[0] == null)) {
                             for(var i = 0; i < senders.length; i++)
                             {
+                                if (i == 0) {
+                                    if (senders[i] == username) {
+                                        if (window.location.href.indexOf("=") == -1) {
+                                            window.location.replace("./messages.php?contact=" + receivers[i]);
+                                        }
+                                    }
+                                    else {
+                                        if (window.location.href.indexOf("=") == -1) {
+                                            window.location.replace("./messages.php?contact=" + senders[i]);
+                                        }
+                                    }
+                                }
                                 if (senders[i] == username) {
                                     var btn = document.createElement("BUTTON");
-                                    btn.setAttribute("id", "Btn");
+                                    btn.setAttribute("id", receivers[i]);
                                     btn.setAttribute("value", receivers[i]);
                                     btn.onclick=function(){
                                         window.location.replace("./messages.php?contact=" + this.value);
@@ -89,7 +103,7 @@
                                 }
                                 else {
                                     var btn = document.createElement("BUTTON");
-                                    btn.setAttribute("id", "Btn");
+                                    btn.setAttribute("id", senders[i]);
                                     btn.setAttribute("value", senders[i]);
                                     btn.onclick=function(){
                                         window.location.replace("./messages.php?contact=" + this.value);
@@ -126,6 +140,7 @@
 
                 if (window.location.href.indexOf("=") != -1) {
                     document.getElementById("currentFriend").innerHTML = recpUser;
+                    document.getElementById("currentFriend").href = "./profile.php?userVar=" + recpUser;
                 }
 
                 $.ajax({
