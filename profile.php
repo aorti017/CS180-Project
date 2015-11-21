@@ -1,3 +1,23 @@
+<?php
+    include "./database.php";
+
+    session_start();
+    if(!isset($_COOKIE['username'])) {
+        header('Location: index.php');
+    }
+    setcookie("username", $_SESSION['username'], 0);
+	
+    $user = $_GET['userVar'];
+    $sql = "SELECT * FROM Users WHERE username = '".$user."'";
+    $results = executeStatement($sql);
+    $username = $results[0][0];
+    $firstname = $results[0][2];
+    $lastname = $results[0][3];
+    $birthday = $results[0][4];
+    $gender = $results[0][5];
+    $email = $results[0][6];
+    $status = $results[0][7];
+?>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -20,37 +40,27 @@
 				</ul>
 			</nav>
 		</div>
-		<form action="getnewinfo.php" method="post"><input type="submit" value="Edit Settings"></form>
     </body>
+	<div class="twitter-widget">
+		<div class="header cf">
+			<a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
+			<h2><?php echo $firstname?> <?php echo $lastname ?> @<?php echo $username ?></h2>
+			<p><?php echo $status ?><br>Contact email:<?php echo $email?></p>
+		</div>
+		<div class="stats cf">
+			<a class="stat"><strong><?php echo $birthday ?></strong>Birthday</a>
+			<a class="stat"><strong><?php echo $gender ?></strong>Gender</a>
+			<a class="stat"><strong>WhatsWeb</strong>Gender</a>
+		</div>
+		<ul class="menu cf">
+			<li><a href="#" class="ico-compose">Compose</a></li>
+			<li><a href="#" class="ico-mentions">Mentions</a></li>
+			<li><a href="#" class="ico-profile">Profile</a></li>
+			<?php if($_GET['userVar'] == $_COOKIE['username']){ echo "<li><a href='getnewinfo.php' class='ico-settings'>Settings</a></li>";}?>
+		</ul>
+	</div>
 </html>
 
-<?php
-    include "./database.php";
-
-    session_start();
-    if(!isset($_COOKIE['username'])) {
-        header('Location: index.php');
-    }
-    setcookie("username", $_SESSION['username'], 0);
-
-    $user = $_GET['userVar'];
-    $sql = "SELECT * FROM Users WHERE username = '".$user."'";
-    $results = executeStatement($sql);
-    $username = $results[0][0];
-    $firstname = $results[0][2];
-    $lastname = $results[0][3];
-    $birthday = $results[0][4];
-    $gender = $results[0][5];
-    $email = $results[0][6];
-    $status = $results[0][7];
-    echo "<br>User name: $username<br>";
-    echo "Email: $email <br>";
-    echo "First name: $firstname <br>";
-    echo "Last name: $lastname <br>";
-    echo "Birthday: $birthday <br>";
-    echo "Gender: $gender <br>";
-    echo "Status: $status <br>";
-?>
 <script type="text/javascript">
     document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
     //gets the userVar GET variable from the URL

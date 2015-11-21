@@ -40,23 +40,7 @@
 	else {
     	header('Location: index.php');
 	}
-
-	if($_SESSION['error'] == "updated")	//checks to see if an update was successful or not
-	{
-		echo "Your information has been updated!<br>";	//if it is, let user be notified
-		$_SESSION['error'] = "none";
-	}
-	else if($_SESSION['error'] == "password")	//if flag was set to password, then prompt user of error
-	{
-		echo "Password not long enough!<br>";
-		$_SESSION['error'] = "none";
-	}
-	else if($_SESSION['error'] == "date")	//if flag was set to date, then prompt user of error
-	{
-		echo "Birthday not proper input!<br>";
-		$_SESSION['error'] = "none";
-	}
-
+	
 	$sql = "SELECT * FROM Users WHERE username = '".$user."'";	//following lines extracts all of current users info
 	$results = executeStatement($sql);
 	$username = $results[0][0];
