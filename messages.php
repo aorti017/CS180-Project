@@ -34,27 +34,79 @@
         		<ul>
             		<li><a href="logout.php">Logout</a></li>
             		<li><a href="contacts.php">Contacts</a></li>
-            		<li><a href="actualMessageList.php">Message List</a></li>
-            		<li><a id="userProf">Profile</a></li>
             		<li id="currentpage"><a href="">Messages</a></li>
+                    <li><a id="userProf">Profile</a></li>
 				</ul>
 				<br>
-                <div style="margin: 0px 25% 0px 25%;">
-                    <div class="messageWrapper">
-                        <div id="messageContainer"></div>
-                        <div class="sendMessageDiv">
-                            <textarea id="newMessage" rows="5" style="width: 100%;"></textarea>
-                            <button class="sendMessage" id="send">Send</button>
-                        </div>
-                    </div>
-                </div>
         	</nav>
         </div>
 
+        <form action="./messages.php" type="GET" style="display: inline-block;">
+            <p id="createText">Create new message:</p>
+            <input type="text" name="contacts">
+        </form>
+        <div id="friends">
+        </div>
+        <div style="margin: -84px 25% 0px 25%;">
+            <p id="currentFriend" align="center" style="color: #FFFFFF;"></p>
+            <div class="messageWrapper">
+                <div id="messageContainer"></div>
+                <div class="sendMessageDiv">
+                    <textarea id="newMessage" rows="5" style="width: 100%;" onkeydown="if (event.keyCode==13) {document.getElementById('send').click(); return false;}"></textarea>
+                    <button class="sendMessage" id="send">Send</button>
+                </div>
+            </div>
+        </div>
+
 		<script type="text/javascript">
+            function getMessageList(){
+                var username = parse();
+                $.ajax({
+                    type: 'GET',
+                    url: './messageList.php',
+                    data: {username: username},
+                    success: function(data){
+                        var obj = jQuery.parseJSON(data);
+                        var senders = obj.sender;
+                        var receivers = obj.receiver;
+                        var timestamps = obj.timestamp;
+
+                        // if the logged in person has no contacts, then senders will be size 1 with a value of null
+                        if (!(senders.length == 1 && senders[0] == null)) {
+                            for(var i = 0; i < senders.length; i++)
+                            {
+                                if (senders[i] == username) {
+                                    var btn = document.createElement("BUTTON");
+                                    btn.setAttribute("id", "Btn");
+                                    btn.setAttribute("value", receivers[i]);
+                                    btn.onclick=function(){
+                                        window.location.replace("./messages.php?contact=" + this.value);
+
+                                    };
+                                    var t = document.createTextNode(receivers[i]);
+                                    btn.appendChild(t);
+                                    document.getElementById("friends").appendChild(btn);
+                                }
+                                else {
+                                    var btn = document.createElement("BUTTON");
+                                    btn.setAttribute("id", "Btn");
+                                    btn.setAttribute("value", senders[i]);
+                                    btn.onclick=function(){
+                                        window.location.replace("./messages.php?contact=" + this.value);
+                                        document.getElementById("currentFriend").innerHTML = this.value;
+                                    };
+                                    var t = document.createTextNode(senders[i]);
+                                    btn.appendChild(t);
+                                    document.getElementById("friends").appendChild(btn);
+                                }
+
+                            }
+                        }
+                    }
+                });
+            }
+
             //used to get the GET variables
-            //for more information see:
-            //http://papermashup.com/read-url-get-variables-withjavascript/
             function getUrlVars() {
                 var parts = window.location.href;
 		        var vars = parts.substring(parts.indexOf("=")+1, parts.length);
@@ -71,9 +123,7 @@
 			}
 			function getNewMessages(t, recpUser){
 				var username = parse();
-				/*TODO*/
-				//get the user the message is supposed to be sent to
-				//from the selected conversation
+                document.getElementById("currentFriend").innerHTML = recpUser;
 
                 $.ajax({
 					type: 'GET',
@@ -149,7 +199,7 @@
 				}
 				//clears the textarea after a message is sent
 				document.getElementById("newMessage").value="";
-				var username = parse();
+                var username = parse();
                 var recpUser = getUrlVars();
 				var t = (new Date).getTime();
 
@@ -163,12 +213,13 @@
 
             $(function(){
 	            document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
-				var time = null;
+                var time = null;
                 var recpUser = getUrlVars();
-				getNewMessages(time, recpUser);
+                getMessageList();
+                getNewMessages(time, recpUser);
             });
 		</script>
-	</body>
+</body>
 </html>
 
 
