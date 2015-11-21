@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+	setcookie('messages', '',0);
+	setcookie('senders', '', 0);
     if($_SESSION['error']== "error")
     {
 		echo '<script language="javascript">';
@@ -64,10 +65,57 @@
                     }
                 });
             }
+			document.addEventListener('DOMContentLoaded', function(){
+				if(Notification.permission != "granted"){
+					Notification.requestPermission();
+				}
+			});
+	    function initNotifications(x){
+		var d = new Date();
+		var username = parse();
+		var n = d.getTime();
+				$.ajax({ 
+			type: 'GET',
+			url: './notifications.php',
+			data: {username: username, time: n},
+			success: function(data){
+				var obj = jQuery.parseJSON(data);
+				var messages = obj.message;
+				var senders = obj.sender;
+				if(messages.length > 0 && senders.length > 0){
+					console.log(messages);
+				}
+				for(i = 0; i < messages.length; i++){
+					/*$.ajax({
+						type: 'GET',
+						url: './cookieParse.php',
+						data: {sender: senders.at(i), message: messages.at(i)},
+						success: function(data){}
+					});*/
+					temp = document.cookie;
+					document.cookie = "sender="+senders[i];
+					document.cookie = "message="+messages[i];
+					if (Notification.permission != "granted")
+    						Notification.requestPermission();
+					  else {
+						    	
+						    var notification = new Notification(parseSender(), {body: parseMessage()});
+						    notification.onclick = function () {
+						    window.location.replace("./messages.php?contacts="+parseSender());};
+
+					 }
+					document.cookie = temp;
+				}
+
+				initNotifications(n);
+			}
+		});
+	    }
 
             $(function(){
 		        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
-                getContacts();
+                	getContacts();
+			initNotifications(0);
 
             });
         </script>
@@ -80,3 +128,6 @@
         </form>
 	</body>
 </html>
+<script>
+
+</script>
