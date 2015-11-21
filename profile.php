@@ -45,12 +45,12 @@
 		<div class="header cf">
 			<a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
 			<h2><?php echo $firstname?> <?php echo $lastname ?> @<?php echo $username ?></h2>
-			<p><?php echo $status ?></p>
+			<p><?php echo $status ?><br>Contact email:<?php echo $email?></p>
 		</div>
 		<div class="stats cf">
 			<a class="stat"><strong><?php echo $birthday ?></strong>Birthday</a>
-			<a href="#" class="stat"><strong>60</strong>following</a>
-			<a href="#" class="stat"><strong>117</strong>followers</a>
+			<a class="stat"><strong><?php echo $gender ?></strong>Gender</a>
+			<a class="stat"><strong>WhatsWeb</strong>Gender</a>
 		</div>
 		<ul class="menu cf">
 			<li><a href="#" class="ico-compose">Compose</a></li>
