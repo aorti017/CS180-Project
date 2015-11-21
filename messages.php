@@ -228,13 +228,67 @@
 					data: {username:username, recpUser:recpUser, time:t , message:message}
 				});
 			});
-
+document.addEventListener('DOMContentLoaded', function(){
+				if(Notification.permission != "granted"){
+					Notification.requestPermission();
+				}
+			});
+function initNotifications(x, tracked, runCount){
+		var username = parse();
+				$.ajax({ 
+			type: 'GET',
+			url: './notifications.php',
+			data: {username: username, time: x},
+			success: function(data){
+				var obj = jQuery.parseJSON(data);
+				var messages = obj.message;
+				var senders = obj.sender;
+				var times = obj.times;
+				if(messages.length > 0 && senders.length > 0){
+					console.log(messages);
+				}
+				for(i = 0; i < messages.length; i++){
+					//make sure the array doesnt grow too large
+					if(runCount >= 500){
+						tracked = []
+					}	
+					if(tracked.indexOf(times[i]) > -1 || senders[i] == getUrlVars()){
+						continue;
+					}
+					else{
+						runCount += 1;
+						tracked.push(times[i]);
+					}
+					temp = document.cookie;
+					document.cookie = "sender="+senders[i];
+					document.cookie = "message="+messages[i];
+					if (Notification.permission != "granted")
+    						Notification.requestPermission();
+					  else {
+						    	
+						    var notification = new Notification(parseSender(), {body: parseMessage()});
+						    notification.onclick = function () {
+						    window.location.replace("./messages.php?contacts="+parseSender());};
+						    setTimeout(function(){
+							notification.close(); 
+							}, 5000);
+					 }
+					document.cookie = temp;
+				}
+				initNotifications(obj.time, tracked, runCount);
+			}
+		});
+	    }
             $(function(){
 	            document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
                 var time = null;
                 var recpUser = getUrlVars();
                 getMessageList();
                 getNewMessages(time, recpUser);
+			var d = new Date();
+		        var tracked = [];
+			initNotifications(d.getTime(), tracked, 0);
+
             });
 		</script>
 </body>
