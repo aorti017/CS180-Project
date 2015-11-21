@@ -34,7 +34,6 @@
         		<ul>
             		<li><a href="logout.php">Logout</a></li>
             		<li><a href="contacts.php">Contacts</a></li>
-            		<!--<li><a href="actualMessageList.php">Message List</a></li>-->
             		<li id="currentpage"><a href="">Messages</a></li>
                     <li><a id="userProf">Profile</a></li>
 				</ul>
@@ -49,6 +48,7 @@
         <div id="friends">
         </div>
         <div style="margin: -84px 25% 0px 25%;">
+            <p id="currentFriend" align="center" style="color: #FFFFFF;"></p>
             <div class="messageWrapper">
                 <div id="messageContainer"></div>
                 <div class="sendMessageDiv">
@@ -81,6 +81,7 @@
                                     btn.setAttribute("value", receivers[i]);
                                     btn.onclick=function(){
                                         window.location.replace("./messages.php?contact=" + this.value);
+
                                     };
                                     var t = document.createTextNode(receivers[i]);
                                     btn.appendChild(t);
@@ -92,6 +93,7 @@
                                     btn.setAttribute("value", senders[i]);
                                     btn.onclick=function(){
                                         window.location.replace("./messages.php?contact=" + this.value);
+                                        document.getElementById("currentFriend").innerHTML = this.value;
                                     };
                                     var t = document.createTextNode(senders[i]);
                                     btn.appendChild(t);
@@ -105,8 +107,6 @@
             }
 
             //used to get the GET variables
-            //for more information see:
-            //http://papermashup.com/read-url-get-variables-withjavascript/
             function getUrlVars() {
                 var parts = window.location.href;
 		        var vars = parts.substring(parts.indexOf("=")+1, parts.length);
@@ -123,9 +123,7 @@
 			}
 			function getNewMessages(t, recpUser){
 				var username = parse();
-				/*TODO*/
-				//get the user the message is supposed to be sent to
-				//from the selected conversation
+                document.getElementById("currentFriend").innerHTML = recpUser;
 
                 $.ajax({
 					type: 'GET',
