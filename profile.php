@@ -21,6 +21,24 @@
 			</nav>
 		</div>
     </body>
+	<div class="twitter-widget">
+		<div class="header cf">
+			<a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
+			<h2>Edwin Delgado @kayrel</h2>
+			<p>I do not recall how I came into existence.<br>Something to do with my dad and mom.</p>
+		</div>
+		<div class="stats cf">
+			<a href="#" class="stat"><strong>1,250</strong>tweets</a>
+			<a href="#" class="stat"><strong>60</strong>following</a>
+			<a href="#" class="stat"><strong>117</strong>followers</a>
+		</div>
+		<ul class="menu cf">
+			<li><a href="#" class="ico-compose">Compose</a></li>
+			<li><a href="#" class="ico-mentions">Mentions</a></li>
+			<li><a href="#" class="ico-profile">Profile</a></li>
+			<li><a href="#" class="ico-settings">Settings</a></li>
+		</ul>
+	</div>
 </html>
 
 <?php
