@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+	setcookie('messages', '',0);
+	setcookie('senders', '', 0);
     if($_SESSION['error']== "error")
     {
 		echo '<script language="javascript">';
@@ -64,10 +65,53 @@
                     }
                 });
             }
+			document.addEventListener('DOMContentLoaded', function(){
+				if(Notification.permission != "granted"){
+					Notification.requestPermission();
+				}
+			});
+	    function initNotifications(){
+		var d = new Date();
+		var username = parse();
+		$.ajax({ 
+			type: 'GET',
+			url: './notifications.php',
+			data: {username: username, time: d.getTime()},
+			success: function(data){
+				var obj = jQuery.parseJSON(data);
+				var messages = obj.message;
+				var senders = obj.sender;
+				for(i = 0; i < messages.length; i++){
+					/*$.ajax({
+						type: 'GET',
+						url: './cookieParse.php',
+						data: {sender: senders.at(i), message: messages.at(i)},
+						success: function(data){}
+					});*/
+					temp = document.cookie;
+					document.cookie = "sender="+senders[i];
+					document.cookie = "message="+messages[i];
+					console.log(document.cookie);
+					if (Notification.permission != "granted")
+    						Notification.requestPermission();
+					  else {
+						    	
+						    var notification = new Notification(parseSender(), {body: parseMessage()});
+						    notification.onclick = function () {
+						    window.open("http://stackoverflow.com/a/13328397/1269037");};
+
+					 }
+					document.cookie = temp;
+				}
+				initNotifications();
+			}
+		});
+	    }
 
             $(function(){
 		        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
-                getContacts();
+                	getContacts();
+			initNotifications();
 
             });
         </script>
@@ -80,3 +124,6 @@
         </form>
 	</body>
 </html>
+<script>
+
+</script>
