@@ -44,13 +44,13 @@
 	<div class="twitter-widget">
 		<div class="header cf">
 			<a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
-			<h2><?php echo $firstname?> <?php echo $lastname ?> @<?php echo $username ?></h2>
-			<p><?php echo $status ?><br>Contact email:<?php echo $email?></p>
+			<h2><?php echo $firstname?> <?php echo $lastname ?></h2>
+			<p><?php echo $status ?><br>Contact email: <?php echo $email?></p>
 		</div>
 		<div class="stats cf">
 			<a class="stat"><strong><?php echo $birthday ?></strong>Birthday</a>
 			<a class="stat"><strong><?php echo $gender ?></strong>Gender</a>
-			<a class="stat"><strong>WhatsWeb</strong>Gender</a>
+			<a class="stat"><strong><?php echo $username ?></strong>Username</a>
 		</div>
 		<ul class="menu cf">
 			<li><a href="#" class="ico-compose">Compose</a></li>
