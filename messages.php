@@ -123,7 +123,10 @@
 			}
 			function getNewMessages(t, recpUser){
 				var username = parse();
-                document.getElementById("currentFriend").innerHTML = recpUser;
+
+                if (window.location.href.indexOf("=") != -1) {
+                    document.getElementById("currentFriend").innerHTML = recpUser;
+                }
 
                 $.ajax({
 					type: 'GET',
