@@ -74,20 +74,20 @@
 
     document.getElementById("compose").href = "./messages.php?contacts=" + userVar;
     document.getElementById("compose").title = "Write a message to " + userVar;
-    document.getElementById("block").onclick = function(){
-        $.ajax({
-            type:'GET',
-            url: './blockUser.php',
-            data: {username: parse(), contact: userVar}
-        });
-    };
 
     if (parse() != userVar) {
         document.getElementById("block").title = "Block or unblock " + userVar;
+        document.getElementById("block").onclick = function(){
+            $.ajax({
+                type:'GET',
+                url: './blockUser.php',
+                data: {username: parse(), contact: userVar}
+            });
+        };
     }
 
-    if(parse() == userVar){
-        document.getElementById("updateStatus").style.display="block";
+    if (parse() == userVar) {
+        document.getElementById("updateStatus").style.display = "block";
         document.getElementById("settings").title = "Update your profile information";
     }
 </script>
