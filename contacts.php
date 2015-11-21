@@ -21,6 +21,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+		<script src="./lib/notify.min.js"></script>
+
         <script src="javascript.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -70,28 +73,32 @@
 					Notification.requestPermission();
 				}
 			});
-	    function initNotifications(x){
-		var d = new Date();
+	    function initNotifications(x, tracked, runCount){
 		var username = parse();
-		var n = d.getTime();
 				$.ajax({ 
 			type: 'GET',
 			url: './notifications.php',
-			data: {username: username, time: n},
+			data: {username: username, time: x},
 			success: function(data){
 				var obj = jQuery.parseJSON(data);
 				var messages = obj.message;
 				var senders = obj.sender;
+				var times = obj.times;
 				if(messages.length > 0 && senders.length > 0){
 					console.log(messages);
 				}
 				for(i = 0; i < messages.length; i++){
-					/*$.ajax({
-						type: 'GET',
-						url: './cookieParse.php',
-						data: {sender: senders.at(i), message: messages.at(i)},
-						success: function(data){}
-					});*/
+					//make sure the array doesnt grow too large
+					if(runCount >= 500){
+						tracked = []
+					}	
+					if(tracked.indexOf(times[i]) > -1){
+						continue;
+					}
+					else{
+						runCount += 1;
+						tracked.push(times[i]);
+					}
 					temp = document.cookie;
 					document.cookie = "sender="+senders[i];
 					document.cookie = "message="+messages[i];
@@ -102,12 +109,14 @@
 						    var notification = new Notification(parseSender(), {body: parseMessage()});
 						    notification.onclick = function () {
 						    window.location.replace("./messages.php?contacts="+parseSender());};
+						    setTimeout(function(){
+							notification.close(); 
+							}, 5000);
 
 					 }
 					document.cookie = temp;
 				}
-
-				initNotifications(n);
+				initNotifications(obj.time, tracked, runCount);
 			}
 		});
 	    }
@@ -115,8 +124,9 @@
             $(function(){
 		        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
                 	getContacts();
-			initNotifications(0);
-
+			var d = new Date();
+		        var tracked = [];
+			initNotifications(d.getTime(), tracked, 0);
             });
         </script>
         <br>
