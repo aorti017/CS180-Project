@@ -6,7 +6,7 @@
         header('Location: index.php');
     }
     setcookie("username", $_SESSION['username'], 0);
-	
+
     $user = $_GET['userVar'];
     $sql = "SELECT * FROM Users WHERE username = '".$user."'";
     $results = executeStatement($sql);
@@ -40,25 +40,30 @@
 				</ul>
 			</nav>
 		</div>
+        <div class="twitter-widget">
+            <div class="header cf">
+                <a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
+                <h2><?php echo $firstname?> <?php echo $lastname ?> @<?php echo $username ?></h2>
+                <p><?php echo $status ?><br>Contact email: <?php if($email!=null) {echo $email;} else {echo "N/A";}?></p>
+            </div>
+            <div class="stats cf">
+                <a class="stat"><strong><?php if($birthday!=null) {echo $birthday;} else {echo "N/A";}?></strong>Birthday</a>
+                <a class="stat"><strong><?php if($gender!=null) {echo $gender;} else {echo "N/A";}?></strong>Gender</a>
+                <a class="stat"><strong><?php echo $username ?></strong>Username</a>
+            </div>
+            <ul class="menu cf">
+                <li><a id="compose" class="ico-compose">Compose</a></li>
+                <?php if($_GET['userVar'] != $_COOKIE['username']){ echo "<li><a id='block' href='' class='ico-mentions'>Block/Unblock</a></li>";}?>
+                <?php if($_GET['userVar'] == $_COOKIE['username']){ echo "<li><a id='settings' href='getnewinfo.php' class='ico-settings'>Settings</a></li>";}?>
+            </ul>
+            <div align="center" style="display: none; width: 100%;" id="updateStatus">
+                <form id="statUpdate" action="./updateStatus.php" type="GET">
+                    <input type="text" name="status" placeholder="Update Status" style="width: 100%;">
+                    <div><input type="submit" value="Update"></div>
+                </form>
+            </div>
+        </div>
     </body>
-	<div class="twitter-widget">
-		<div class="header cf">
-			<a href="http://twitter.com/kayrel" target="_blank" class="avatar"><img src="http://cameronbaney.com/codepen/twitter-widget/avatar.jpg" alt="Edwin Delgado"></a>
-			<h2><?php echo $firstname?> <?php echo $lastname ?> @<?php echo $username ?></h2>
-			<p><?php echo $status ?><br>Contact email:<?php echo $email?></p>
-		</div>
-		<div class="stats cf">
-			<a class="stat"><strong><?php echo $birthday ?></strong>Birthday</a>
-			<a class="stat"><strong><?php echo $gender ?></strong>Gender</a>
-			<a class="stat"><strong>WhatsWeb</strong>Gender</a>
-		</div>
-		<ul class="menu cf">
-			<li><a href="#" class="ico-compose">Compose</a></li>
-			<li><a href="#" class="ico-mentions">Mentions</a></li>
-			<li><a href="#" class="ico-profile">Profile</a></li>
-			<?php if($_GET['userVar'] == $_COOKIE['username']){ echo "<li><a href='getnewinfo.php' class='ico-settings'>Settings</a></li>";}?>
-		</ul>
-	</div>
 </html>
 
 <script type="text/javascript">
@@ -67,43 +72,22 @@
     var parts = window.location.href;
     var userVar = parts.substring(parts.indexOf("=")+1, parts.length);
 
-    var btn = document.createElement("BUTTON");
-    btn.setAttribute("id", "contactBtn_");
-    btn.setAttribute("value", userVar);
-    btn.onclick=function(){
-    window.location.replace("./messages.php?contacts="+this.value);
+    document.getElementById("compose").href = "./messages.php?contacts=" + userVar;
+    document.getElementById("compose").title = "Write a message to " + userVar;
+    document.getElementById("block").onclick = function(){
+        $.ajax({
+            type:'GET',
+            url: './blockUser.php',
+            data: {username: parse(), contact: userVar}
+        });
     };
-    var t = document.createTextNode(userVar);
-    btn.appendChild(t);
-    document.body.appendChild(btn);
 
-    if(parse() != userVar){
-        var blockBtn = document.createElement("BUTTON");
-        blockBtn.setAttribute("id", userVar);
-        blockBtn.setAttribute("value", parse());
-        blockBtn.onclick=function(){
-            $.ajax({
-                type:'GET',
-                url: './blockUser.php',
-                data: {username: this.value, contact: this.id}
-            });
-        };
-        var newT = document.createTextNode("Block/Unblock User");
-        blockBtn.appendChild(newT);
-        document.body.appendChild(blockBtn);
+    if (parse() != userVar) {
+        document.getElementById("block").title = "Block or unblock " + userVar;
     }
-</script>
 
-<html>
-	<form id="statUpdate" style="display: none" action="./updateStatus.php" type="GET">
-		Update Status:<br>
-		<input type="text" name="status">
-        <input type="submit" value="Update">
-	</form>
-</html>
-
-<script>
     if(parse() == userVar){
-        document.getElementById("statUpdate").style.display="block";
+        document.getElementById("updateStatus").style.display="block";
+        document.getElementById("settings").title = "Update your profile information";
     }
 </script>

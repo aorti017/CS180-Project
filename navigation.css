@@ -239,7 +239,8 @@ body > p a {
 }
 .menu .ico-mentions {
 	background-position: -31px -1px;
-	width: 27px;
+	background: url(block.png);
+    width: 27px;
 	height: 28px;
 }
 .menu .ico-profile {
