@@ -15,7 +15,7 @@
         		<ul>
             		<li><a href="logout.php">Logout</a></li>
 					<li><a href="contacts.php">Contacts</a></li>
-					<li><a href="actualMessageList.php">Message List</a></li>
+					<li><a href="messages.php">Messages</a></li>
                 	<li id="currentpage"><a id="userProf">Profile</a></li>
 				</ul>
 			</nav>
@@ -52,45 +52,48 @@
     echo "Status: $status <br>";
 ?>
 <script type="text/javascript">
-document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
-//gets the userVar GET variable from the URL
-var parts = window.location.href;
-var userVar = parts.substring(parts.indexOf("=")+1, parts.length);
+    document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
+    //gets the userVar GET variable from the URL
+    var parts = window.location.href;
+    var userVar = parts.substring(parts.indexOf("=")+1, parts.length);
 
-var btn = document.createElement("BUTTON");
-btn.setAttribute("id", "contactBtn_");
-btn.setAttribute("value", userVar);
-btn.onclick=function(){
-window.location.replace("./messages.php?contacts="+this.value);
-};
-var t = document.createTextNode(userVar);
-btn.appendChild(t);
-document.body.appendChild(btn);
+    var btn = document.createElement("BUTTON");
+    btn.setAttribute("id", "contactBtn_");
+    btn.setAttribute("value", userVar);
+    btn.onclick=function(){
+    window.location.replace("./messages.php?contacts="+this.value);
+    };
+    var t = document.createTextNode(userVar);
+    btn.appendChild(t);
+    document.body.appendChild(btn);
 
-if(parse() != userVar){
-	var blockBtn = document.createElement("BUTTON");
-	blockBtn.setAttribute("id", userVar);
-	blockBtn.setAttribute("value", parse());
-	blockBtn.onclick=function(){
-		$.ajax({
-			type:'GET',
-			url: './blockUser.php',
-			data: {username: this.value, contact: this.id}
-		});
-	};
-	var newT = document.createTextNode("Block/Unblock User");
-	blockBtn.appendChild(newT);
-	document.body.appendChild(blockBtn);
-}
+    if(parse() != userVar){
+        var blockBtn = document.createElement("BUTTON");
+        blockBtn.setAttribute("id", userVar);
+        blockBtn.setAttribute("value", parse());
+        blockBtn.onclick=function(){
+            $.ajax({
+                type:'GET',
+                url: './blockUser.php',
+                data: {username: this.value, contact: this.id}
+            });
+        };
+        var newT = document.createTextNode("Block/Unblock User");
+        blockBtn.appendChild(newT);
+        document.body.appendChild(blockBtn);
+    }
 </script>
+
 <html>
-	<form id="statUpdate" style="display: none"  action="./updateStatus.php" type="GET">
+	<form id="statUpdate" style="display: none" action="./updateStatus.php" type="GET">
 		Update Status:<br>
 		<input type="text" name="status">
+        <input type="submit" value="Update">
 	</form>
 </html>
+
 <script>
-if(parse() == userVar){
-	document.getElementById("statUpdate").style.display="block";
-}
+    if(parse() == userVar){
+        document.getElementById("statUpdate").style.display="block";
+    }
 </script>
