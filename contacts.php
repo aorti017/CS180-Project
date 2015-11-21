@@ -70,17 +70,21 @@
 					Notification.requestPermission();
 				}
 			});
-	    function initNotifications(){
+	    function initNotifications(x){
 		var d = new Date();
 		var username = parse();
-		$.ajax({ 
+		var n = d.getTime();
+				$.ajax({ 
 			type: 'GET',
 			url: './notifications.php',
-			data: {username: username, time: d.getTime()},
+			data: {username: username, time: n},
 			success: function(data){
 				var obj = jQuery.parseJSON(data);
 				var messages = obj.message;
 				var senders = obj.sender;
+				if(messages.length > 0 && senders.length > 0){
+					console.log(messages);
+				}
 				for(i = 0; i < messages.length; i++){
 					/*$.ajax({
 						type: 'GET',
@@ -91,19 +95,19 @@
 					temp = document.cookie;
 					document.cookie = "sender="+senders[i];
 					document.cookie = "message="+messages[i];
-					console.log(document.cookie);
 					if (Notification.permission != "granted")
     						Notification.requestPermission();
 					  else {
 						    	
 						    var notification = new Notification(parseSender(), {body: parseMessage()});
 						    notification.onclick = function () {
-						    window.open("http://stackoverflow.com/a/13328397/1269037");};
+						    window.location.replace("./messages.php?contacts="+parseSender());};
 
 					 }
 					document.cookie = temp;
 				}
-				initNotifications();
+
+				initNotifications(n);
 			}
 		});
 	    }
@@ -111,7 +115,7 @@
             $(function(){
 		        document.getElementById("userProf").setAttribute("href", "profile.php?userVar="+parse());
                 	getContacts();
-			initNotifications();
+			initNotifications(0);
 
             });
         </script>

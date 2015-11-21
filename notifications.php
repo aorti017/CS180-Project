@@ -1,4 +1,5 @@
 <?php
+sleep(1);
     session_start();
     if(!isset($_COOKIE['username'])) {
         header('Location: index.php');
@@ -8,7 +9,7 @@
 
 	include './database.php';
     $sender = $_GET['username'];
-    $lastTimeStamp = $_GET['time'] - 800;
+    $lastTimeStamp = $_GET['time'];
     $sqlStatement = "SELECT message, sender FROM Messages WHERE receiver='".$sender."' and timestamp >= ".$lastTimeStamp." ORDER BY timestamp DESC";
     //selects the most recent messages, ordered by timestamp
     $results = executeStatement($sqlStatement);
@@ -25,5 +26,6 @@
             );
     $json = json_encode($ret);
 echo $json;
-sleep(1);
+
 ?>
+
