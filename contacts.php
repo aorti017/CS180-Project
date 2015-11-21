@@ -22,8 +22,6 @@
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
-		<script src="./lib/notify.min.js"></script>
-
         <script src="javascript.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -58,7 +56,6 @@
                             btn.setAttribute("id", "contactBtn_");
                             btn.setAttribute("value", conts[i]);
                             btn.onclick=function(){
-                                //window.location.replace("./messages.php?contacts="+this.value);
                                 window.location.replace("profile.php?userVar="+this.value);
                             };
                             var t = document.createTextNode(conts[i]);
@@ -84,9 +81,6 @@
 				var messages = obj.message;
 				var senders = obj.sender;
 				var times = obj.times;
-				if(messages.length > 0 && senders.length > 0){
-					console.log(messages);
-				}
 				for(i = 0; i < messages.length; i++){
 					//make sure the array doesnt grow too large
 					if(runCount >= 500){
