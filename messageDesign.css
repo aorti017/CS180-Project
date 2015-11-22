@@ -91,3 +91,13 @@ body {
 #createText {
     color: #FFFFFF;
 }
+
+#currentFriend {
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+#currentFriendWrapper {
+    text-align: center;
+    margin-bottom: 10px;
+}
