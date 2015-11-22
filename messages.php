@@ -210,7 +210,16 @@
 				{
 					type: 'GET',
 					url: './sendMessage.php',
-					data: {username:username, recpUser:recpUser, time:t , message:message}
+					data: {username:username, recpUser:recpUser, time:t , message:message},
+					success: function(data){
+						var obj = jQuery.parseJSON(data);
+						if(obj.status != ""){
+							var format = "<div class='bubbleTo'><p style='color:red'>" + obj.status + "</p></div>";
+								    $('#messageContainer').append(format);
+							var bottomOfMessages = document.getElementById("messageContainer");
+							bottomOfMessages.scrollTop = bottomOfMessages.scrollHeight;
+						}
+					}
 				});
 			});
 document.addEventListener('DOMContentLoaded', function(){
