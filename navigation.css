@@ -91,7 +91,7 @@ ul, li{ list-style:none; margin:0; padding:0;}/*1.1*/
 * 1.2 - FORMATTING
 * --------------------------------------------------------------*/
 body {
-	background: #343434 url(http://www.hd-wallpapersdownload.com/upload/bulk-upload/hd-wallpaper-of-nature-in.jpg);
+	background: #343434 url(http://i.imgur.com/trAbEFU.jpg);
 	background-size: cover;
 	color: #4c4c4c;
 	font:300 1.1em/1.7em 'HelveticaNeue-Light', Helvetica, Arial, sans-serif;
@@ -155,6 +155,8 @@ body > p a {
 }
 .avatar img {
 	display: block;
+	width: 70px;
+	height: 80px;
 	box-shadow: 0 0 2px rgba(0,0,0,.5) inset
 }
 .header h2, .header p {
