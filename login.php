@@ -10,7 +10,7 @@
             $statement = "SELECT password FROM Users WHERE BINARY username='".$_POST['username']."'";
             $results = executeStatement($statement);
             if (count($results) == 0) {
-                echo "Invalid username";
+		header('Location: index.php?error=login');
             }
             else {
                 $passwordHash = $results[0][0];
@@ -21,7 +21,7 @@
                     header('Location: contacts.php');
                 }
                 else {
-                    echo "Invalid password";
+                	header('Location: index.php?error=login');
                 }
             }
 		?>
