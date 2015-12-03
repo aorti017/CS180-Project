@@ -97,7 +97,7 @@
 			});
     function initNotifications(x, tracked, runCount){
 		var username = parse();
-				$.ajax({ 
+				$.ajax({
 			type: 'GET',
 			url: './notifications.php',
 			data: {username: username, time: x},
@@ -113,7 +113,7 @@
 					//make sure the array doesnt grow too large
 					if(runCount >= 500){
 						tracked = []
-					}	
+					}
 					if(tracked.indexOf(times[i]) > -1){
 						continue;
 					}
@@ -127,12 +127,12 @@
 					if (Notification.permission != "granted")
     						Notification.requestPermission();
 					  else {
-						    	
+
 						    var notification = new Notification(parseSender(), {body: parseMessage()});
 						    notification.onclick = function () {
 						    window.location.replace("./messages.php?contacts="+parseSender());};
 						    setTimeout(function(){
-							notification.close(); 
+							notification.close();
 							}, 5000);
 					 }
 					document.cookie = temp;
