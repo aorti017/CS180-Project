@@ -27,13 +27,9 @@ if (response.status === 'connected') {
 testAPI();
 } else if (response.status === 'not_authorized') {
 // The person is logged into Facebook, but not your app.
-document.getElementById('status').innerHTML = 'Please log ' +
-'into this app.';
 } else {
 // The person is not logged into Facebook, so we're not sure if
 // they are logged into this app or not.
-document.getElementById('status').innerHTML = 'Please log ' +
-'into Facebook.';
 }
 }
 
@@ -118,10 +114,11 @@ FB.api('/me?fields=name,email', function(response) {
 	    	<form action="register.php" method="post">
     			<button>Register</button>
         	</form>
-			<fb:login-button scope="public_profile,email,user_birthday" auth_type:'rerequest'  onlogin="checkLoginState();">
-			</fb:login-button>
-			<button onclick="FB.logout()">Logout</button>
-    	</div>
+            <div align="center">
+			    <fb:login-button scope="public_profile,email,user_birthday" onlogin="checkLoginState();">
+			    </fb:login-button>
+    	    </div>
+        </div>
 		<div id="status">
 		</div>
 	</body>
