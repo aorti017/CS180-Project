@@ -29,6 +29,9 @@
 					<input type="radio" name="updategender" value="Female"><span class="sex">Female</span>
 					<br>
 					<br>
+					<input type="checkbox" name="privacy" value="private"><span class="sex">Update privacy</span>
+					<br>
+					<br>
 					<input type="submit" value="Update">
 				</form>
 

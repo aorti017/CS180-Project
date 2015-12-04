@@ -17,12 +17,19 @@
     $gender = $results[0][5];
     $email = $results[0][6];
     $status = $results[0][7];
+    $privacy = $results[0][9];
+
+    if (($_SESSION['username'] != $user) && ($privacy == 'y')) {
+		$_SESSION['error'] = "private";
+		header('Location: contacts.php');
+    }
 ?>
+
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-        	<script src="javascript.js"></script>
+        <script src="javascript.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -78,7 +85,9 @@ FB.getLoginStatus(function(response) {
             <div class="header cf">
                 <a href="https://www.facebook.com/" target="_blank" class="avatar"><img id="shitlicker" src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png"></a>
                 <h2><?php echo $firstname?> <?php echo $lastname ?></h2>
-                <p><?php echo $status ?><br>Contact email: <?php if($email!=null) {echo $email;} else {echo "N/A";}?></p>
+                <p>Privacy: <?php if($privacy=='y') {echo 'On';} else {echo 'Off';}?><br>
+                Status: <?php echo $status ?><br>
+                Contact email: <?php if($email!=null) {echo $email;} else {echo "N/A";}?></p>
             </div>
             <div class="stats cf">
                 <a class="stat"><strong><?php if($birthday!=null) {echo $birthday;} else {echo "N/A";}?></strong>Birthday</a>
