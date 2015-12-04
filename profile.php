@@ -44,6 +44,23 @@
       xfbml      : true,
       version    : 'v2.5'
     });
+
+FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    var accessToken = response.authResponse.accessToken;
+	FB.api('/me?fields=id', function(response) {
+	var url = "http://graph.facebook.com/"+ response.id +"/picture";
+
+	//var myArr = JSON.parse("'"+xmlhttp.responseText+"'");
+	var elem = document.getElementById("shitlicker");
+	elem.src=url;
+
+});
+
+
+  } 
+} );
+
   };
 
   (function(d, s, id){
@@ -66,7 +83,7 @@
 		</div>
         <div class="twitter-widget">
             <div class="header cf">
-                <a href="https://www.facebook.com/" target="_blank" class="avatar"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png"></a>
+                <a href="https://www.facebook.com/" target="_blank" class="avatar"><img id="shitlicker" src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png"></a>
                 <h2><?php echo $firstname?> <?php echo $lastname ?></h2>
                 <p>Privacy: <?php if($privacy=='y') {echo 'On';} else {echo 'Off';}?><br>
                 Status: <?php echo $status ?><br>
@@ -167,7 +184,7 @@
 			}
 		});
 	    }
-	var d = new Date();
+        	var d = new Date();
 	var tracked = [];
 	initNotifications(d.getTime(), tracked, 0);
 </script>
