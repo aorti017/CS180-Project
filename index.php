@@ -102,7 +102,6 @@ FB.api('/me?fields=name,email', function(response) {
 
 
 
-			<div class="logo"></div>
 		<div class="login-block">
 	    	<h1>Login</h1>
         	<form action="login.php" method="post">
