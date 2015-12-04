@@ -29,10 +29,27 @@
 	</head>
 
 	<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '411711342356748',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 		<div>
 			<nav class="main-menu">
         		<ul>
-            		<li><a href="logout.php">Logout</a></li>
+            		<li><a onclick = "FB.logout()" href="logout.php">Logout</a></li>
             		<li><a href="contacts.php">Contacts</a></li>
             		<li id="currentpage"><a href="">Messages</a></li>
                     <li><a id="userProf">Profile</a></li>

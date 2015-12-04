@@ -30,10 +30,27 @@
 		<link rel="stylesheet" type="text/css" href="navigation.css">
 	</head>
 	<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '411711342356748',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 		<div>
 			<nav class="main-menu">
         		<ul>
-            		<li><a href="logout.php">Logout</a></li>
+            		<li><a onclick="FB.logout()" href="logout.php">Logout</a></li>
 					<li><a href="contacts.php">Contacts</a></li>
 					<li><a href="messages.php">Messages</a></li>
                 	<li id="currentpage"><a id="userProf">Profile</a></li>
@@ -97,7 +114,7 @@
 			});
     function initNotifications(x, tracked, runCount){
 		var username = parse();
-				$.ajax({ 
+				$.ajax({
 			type: 'GET',
 			url: './notifications.php',
 			data: {username: username, time: x},
@@ -113,7 +130,7 @@
 					//make sure the array doesnt grow too large
 					if(runCount >= 500){
 						tracked = []
-					}	
+					}
 					if(tracked.indexOf(times[i]) > -1){
 						continue;
 					}
@@ -127,12 +144,12 @@
 					if (Notification.permission != "granted")
     						Notification.requestPermission();
 					  else {
-						    	
+
 						    var notification = new Notification(parseSender(), {body: parseMessage()});
 						    notification.onclick = function () {
 						    window.location.replace("./messages.php?contacts="+parseSender());};
 						    setTimeout(function(){
-							notification.close(); 
+							notification.close();
 							}, 5000);
 					 }
 					document.cookie = temp;

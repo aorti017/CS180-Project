@@ -27,13 +27,9 @@ if (response.status === 'connected') {
 testAPI();
 } else if (response.status === 'not_authorized') {
 // The person is logged into Facebook, but not your app.
-document.getElementById('status').innerHTML = 'Please log ' +
-'into this app.';
 } else {
 // The person is not logged into Facebook, so we're not sure if
 // they are logged into this app or not.
-document.getElementById('status').innerHTML = 'Please log ' +
-'into Facebook.';
 }
 }
 
@@ -49,13 +45,13 @@ statusChangeCallback(response);
 window.fbAsyncInit = function() {
 FB.init({
 appId      : '411711342356748',
-cookie     : true,  // enable cookies to allow the server to access 
+cookie     : true,  // enable cookies to allow the server to access
 // the session
 xfbml      : true,  // parse social plugins on this page
 version    : 'v2.2' // use version 2.2
 });
 
-// Now that we've initialized the JavaScript SDK, we call 
+// Now that we've initialized the JavaScript SDK, we call
 // FB.getLoginStatus().  This function gets the state of the
 // person visiting this page and can return one of three states to
 // the callback you provide.  They can be:
@@ -91,7 +87,7 @@ FB.api('/me?fields=name,email', function(response) {
 			  document.getElementById('status').innerHTML =
 					  'Thanks for logging in, ' + response.name + '!';
 						 console.log(response.email);
-						 console.log(JSON.stringify(response)); 
+						 console.log(JSON.stringify(response));
 						 var fbid = response.id;
 						 var fbemail = response.email;
 
@@ -106,24 +102,31 @@ FB.api('/me?fields=name,email', function(response) {
 
 
 
-			</<div class="logo"></</div>
 		<div class="login-block">
 	    	<h1>Login</h1>
         	<form action="login.php" method="post">
+				<font id="e" color="red" style="display: none;">Incorrect username and/or password!</font>
 				<input type="username" name="username" placeholder="Username" id="username"><br>
 				<input type="password" name="password" placeholder="Password" id="password"><br>
 				<button>Submit</button>
-				</<input type="submit" value="Login" name="login"> 
 			</form>
 	    	<form action="register.php" method="post">
     			<button>Register</button>
-    			</<input type="submit" value="Register">
         	</form>
-			<fb:login-button scope="public_profile,email,user_birthday" auth_type:'rerequest'  onlogin="checkLoginState();">
-			</fb:login-button>
-			<button onclick="FB.logout()">Logout</button>
-    	</div>
+            <div align="center">
+			    <fb:login-button scope="public_profile,email,user_birthday" onlogin="checkLoginState();">
+			    </fb:login-button>
+    	    </div>
+        </div>
 		<div id="status">
 		</div>
 	</body>
+	<script>
+		var parts = window.location.href;
+		var error = parts.substring(parts.indexOf("=")+1, parts.length);
+		if(error == "login"){
+			console.log(document.getElementById("e"));
+			document.getElementById("e").style.display="inline";
+		}
+	</script>
 </html>

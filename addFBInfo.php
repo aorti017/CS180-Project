@@ -34,7 +34,7 @@ function getUrlVars() {
 										      }(document, 'script', 'facebook-jssdk'));
 			  
 
-	function facebookInit(){
+function facebookInit(){
 		FB.api(
     "/me?fields=first_name, last_name,id, email,birthday,gender",
 	    function (response) {
@@ -47,9 +47,8 @@ var y = date.getFullYear();
 var format_date = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
 
 
-										console.log(getUrlVars()["username"]);
+										console.log(response.birthday);
 		
-
 		window.location.replace("./fbMakeUser.php?firstname="+response.first_name+"&lastname="+response.last_name+"&birthday="+format_date+"&gender="+response.gender+"&email="+response.email+"&fbid="+response.id+"&username="+getUrlVars()["username"]);
 							        }
 									    }
@@ -57,7 +56,7 @@ var format_date = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d 
 
 }
 $(function(){
-
+	facebookInit();
 	});
 			  </script>
 <p id ="Name"></p>
