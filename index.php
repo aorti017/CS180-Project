@@ -106,18 +106,15 @@ FB.api('/me?fields=name,email', function(response) {
 
 
 
-			</<div class="logo"></</div>
 		<div class="login-block">
 	    	<h1>Login</h1>
         	<form action="login.php" method="post">
 				<input type="username" name="username" placeholder="Username" id="username"><br>
 				<input type="password" name="password" placeholder="Password" id="password"><br>
 				<button>Submit</button>
-				</<input type="submit" value="Login" name="login"> 
 			</form>
 	    	<form action="register.php" method="post">
     			<button>Register</button>
-    			</<input type="submit" value="Register">
         	</form>
 			<fb:login-button scope="public_profile,email,user_birthday" auth_type:'rerequest'  onlogin="checkLoginState();">
 			</fb:login-button>
