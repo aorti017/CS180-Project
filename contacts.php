@@ -9,6 +9,12 @@
         echo '</script>';
 		$_SESSION['error'] = "none";
 	}
+	else if ($_SESSION['error'] == "private") {
+		echo '<script language="javascript">';
+        echo 'alert("That user\'s profile is private.")';
+        echo '</script>';
+		$_SESSION['error'] = "none";
+	}
 
     if(!isset($_COOKIE['username'])) {
         header('Location: index.php');

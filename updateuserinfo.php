@@ -18,7 +18,8 @@
 	$birthday = $results[0][4];
 	$gender = $results[0][5];
 	$email = $results[0][6];
-
+	$privacy = $results[0][9];
+	
 	//check if any new information was editted, if it was keep it, and sicard previous, otherwise keep old user values
 	if($_POST['updatepassword'] !='')
 	{
@@ -63,5 +64,16 @@
 		$sql = "UPDATE Users SET email= '".$email."' WHERE username = '".$userVar."'"; //update email
 		$results = executeStatement($sql);
 	}
+	if($_POST['privacy'] != '') {
+		if ($privacy == 'n') {
+			$sql = "UPDATE Users SET privacy='y' WHERE username = '".$userVar."'"; //update privacy
+			$results = executeStatement($sql);
+		}
+		else {
+			$sql = "UPDATE Users SET privacy='n' WHERE username = '".$userVar."'"; //update privacy
+			$results = executeStatement($sql);
+		}
+	}
+	
 	header('location: profile.php?userVar='.$userVar);	//redirect back to profile page
 ?>
